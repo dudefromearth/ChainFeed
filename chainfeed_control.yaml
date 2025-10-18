@@ -1,0 +1,38 @@
+# chainfeed_control.yaml
+
+symbols:
+  - SPX
+  - NDX
+  - ES
+  - NQ
+  - TSLA
+  - SPY
+  - QQQ
+
+feeds:
+  raw:
+    enabled: true
+    frequency_ms: 1000
+
+  full:
+    enabled: true
+    frequency_ms: 2000
+
+  diff:
+    enabled: true
+    frequency_ms: 500
+
+heartbeat:
+  enabled: true
+  interval_ms: 10000
+  key: "chainfeed:heartbeat"
+
+expiration_cache:
+  enabled: true
+  redis_key: "chainfeed:expirations"
+  ttl_seconds: 86400  # 1 day
+
+providers:
+  live: true
+  historical: true
+  synthetic: true

@@ -1,0 +1,13 @@
+variant: FatTail
+default_dte: 0
+max_dte: 5
+symbols:
+  - symbol: SPX
+    alias: S&P 500 Index
+    dtes: [0, 1, 2, 3, 4, 5]
+  - symbol: ES
+    alias: E-mini S&P
+    dtes: [0, 1, 2, 3, 4, 5]
+heartbeat:
+  enabled: true
+  interval_sec: 5

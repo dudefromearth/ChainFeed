@@ -1,0 +1,112 @@
+{
+  "symbol": "SPX",
+  "api_symbol": "I:SPX",
+  "ts": "2025-10-17T11:41:58+00:00",
+  "expiration": "2025-10-17",
+  "spot": 6621.725,
+  "total_open_interest": 918725,
+  "total_volume": 738392,
+  "count": 400,
+  "contracts": [
+    {
+      "details": {
+        "ticker": "O:SPX251017C06370000",
+        "strike_price": 6370,
+        "contract_type": "call",
+        "expiration_date": "2025-10-17"
+      },
+      "last_quote": {
+        "ask": 253.5,
+        "ask_size": 3,
+        "ask_exchange": 302,
+        "bid": 251.8,
+        "bid_size": 3,
+        "bid_exchange": 302,
+        "last_updated": 1760648397479744930,
+        "midpoint": 252.65,
+        "timeframe": "REAL-TIME"
+      },
+      "last_trade": {
+        "sip_timestamp": 1760366893106000000,
+        "conditions": [
+          209
+        ],
+        "price": 275.1,
+        "size": 4,
+        "exchange": 302,
+        "timeframe": "REAL-TIME"
+      },
+      "greeks": {
+        "delta": 1.0000000000389624,
+        "gamma": 2.4727822994733473E-10,
+        "theta": -0.731199509800979,
+        "vega": -0.0002635046842081992
+      },
+      "volume": 4,
+      "open_interest": 49,
+      "iv": 0.0002895205412228928,
+      "day": {
+        "change": 0,
+        "change_percent": 0,
+        "close": 275.1,
+        "high": 275.1,
+        "last_updated": 1760385600000000000,
+        "low": 275.1,
+        "open": 275.1,
+        "previous_close": 275.1,
+        "volume": 4,
+        "vwap": 275.1
+      }
+    },
+        {
+      "details": {
+        "ticker": "O:SPXW251017P06865000",
+        "strike_price": 6865,
+        "contract_type": "put",
+        "expiration_date": "2025-10-17"
+      },
+      "last_quote": {
+        "ask": 256.5,
+        "ask_size": 1,
+        "ask_exchange": 302,
+        "bid": 228.1,
+        "bid_size": 1,
+        "bid_exchange": 302,
+        "last_updated": 1760648228071205191,
+        "midpoint": 242.3,
+        "timeframe": "REAL-TIME"
+      },
+      "last_trade": {
+        "sip_timestamp": 1760110362661000000,
+        "conditions": [
+          236
+        ],
+        "price": 234,
+        "size": 1,
+        "exchange": 302,
+        "timeframe": "REAL-TIME"
+      },
+      "greeks": {
+        "delta": -0.9136542608197981,
+        "gamma": 0.000935004615306328,
+        "theta": -25.397028609447116,
+        "vega": 0.44748414906678535
+      },
+      "volume": 1,
+      "open_interest": 3,
+      "iv": 0.6812190806806081,
+      "day": {
+        "change": 0,
+        "change_percent": 0,
+        "close": 234,
+        "high": 234,
+        "last_updated": 1760126400000000000,
+        "low": 234,
+        "open": 234,
+        "previous_close": 234,
+        "volume": 1,
+        "vwap": 234
+      }
+    }
+  ]
+}
