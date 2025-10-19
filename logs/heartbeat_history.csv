@@ -1,0 +1,10 @@
+timestamp,group,state,delta_since_last_s,uptime
+2025-10-18T23:59:13.072231+00:00,spx_complex,✅ active,0.3,00m:00s
+2025-10-19T00:08:49.676468+00:00,spx_complex,⚠️ overdue,36.5,09m:36s
+2025-10-19T00:09:13.136432+00:00,spx_complex,🚨 silent,60.0,10m:00s
+2025-10-19T14:29:11.779092+00:00,spx_complex,✅ active,0.3,00m:00s
+2025-10-19T14:30:39.945025+00:00,spx_complex,⚠️ overdue,36.2,01m:28s
+2025-10-19T14:31:04.247960+00:00,spx_complex,🚨 silent,60.5,01m:52s
+2025-10-19T14:34:11.445171+00:00,spx_complex,✅ active,29.1,00m:29s
+2025-10-19T14:35:19.403689+00:00,spx_complex,⚠️ overdue,37.0,01m:37s
+2025-10-19T14:35:42.718400+00:00,spx_complex,🚨 silent,60.3,02m:00s

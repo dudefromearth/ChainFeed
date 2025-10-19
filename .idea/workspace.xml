@@ -4,24 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3dcab700-4ada-4568-aa07-958a1371a59f" name="Changes" comment="Initial commit">
-      <change afterPath="$PROJECT_DIR$/core/heartbeat_monitor.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/historical_feed_manager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/group/group_registry.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/groups.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/notebooks/notebook_heartbeat_analysis.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/test_historical_feed_manager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/test_historical_ingest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/test_historical_provider.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/test_normalize_snapshot.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/test_snapshot_inspect.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/heartbeat_watcher.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/heartbeat_watcher_advanced.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/heartbeat_watcher_predictive.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/redis_inspect.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/chain_ingestor.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/chain_ingestor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/providers/historical_provider.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/providers/historical_provider.py" afterDir="false" />
+    <list default="true" id="3dcab700-4ada-4568-aa07-958a1371a59f" name="Changes" comment="Weekend design">
+      <change beforePath="$PROJECT_DIR$/READEME.md" beforeDir="false" afterPath="$PROJECT_DIR$/READEME.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,7 +156,7 @@
       <updated>1760807341328</updated>
       <workItem from="1760807342699" duration="2666000" />
       <workItem from="1760810021076" duration="183000" />
-      <workItem from="1760810216203" duration="10829000" />
+      <workItem from="1760810216203" duration="12113000" />
     </task>
     <task id="LOCAL-00007" summary="Initial commit">
       <option name="closed" value="true" />
@@ -198,7 +182,15 @@
       <option name="project" value="LOCAL" />
       <updated>1760808015022</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Weekend design">
+      <option name="closed" value="true" />
+      <created>1760835908925</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1760835908925</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -217,6 +209,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
+    <MESSAGE value="Weekend design" />
+    <option name="LAST_COMMIT_MESSAGE" value="Weekend design" />
   </component>
 </project>
