@@ -108,3 +108,39 @@ Built for high-integrity environments where correctness matters.
 - REST control and monitoring API  
 - Long-dated expiration strategies  
 - Archival ingestion and storage  
+
+
+⸻
+
+🧩 Project Structure
+```text
+ChainFeed/
+├── core/
+│   ├── chain_ingestor.py              # Normalization engine
+│   ├── chain_normalizer.py            # Canonical schema enforcement
+│   ├── historical_feed_manager.py     # Group orchestration and heartbeat control
+│   └── providers/                     # Snapshot providers (live, historical, synthetic)
+│
+├── utils/
+│   ├── redis_client.py                # Redis connection manager
+│   ├── redis_inspect.py               # Inspect current feed and heartbeat data
+│   ├── heartbeat_watcher.py           # Monitor live feed TTL and activity
+│   └── expiration_utils.py            # Option expiration helpers
+│
+├── config/
+│   ├── groups.yaml                    # Defines correlated complexes (SPX, NDX, etc.)
+│   ├── chainfeed_constants.py         # Shared constants and Redis key formats
+│   └── variant_config.yaml            # Alternate configs for dev/test
+│
+├── test/                              # Unit and integration tests
+│   ├── test_historical_provider.py
+│   ├── test_historical_ingest.py
+│   ├── test_normalize_snapshot.py
+│   └── test_snapshot_inspect.py
+│
+├── data/                              # Local JSON files (e.g., formatted_SPX.json)
+├── notebooks/                         # Analysis and visualization notebooks
+│   └── notebook_heartbeat_analysis.py
+├── requirements.txt
+└── README.md
+```
