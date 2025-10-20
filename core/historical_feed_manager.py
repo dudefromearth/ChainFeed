@@ -1,184 +1,145 @@
 """
 core/historical_feed_manager.py
-──────────────────────────────────────────────
-Coordinates historical snapshot ingestion, normalization,
-and publication to Redis. Emits heartbeats per group.
+---------------------------------
+Manages historical chain feed publication from local files or
+Polygon historical API snapshots.
 
-Fully hardened:
-  - Auto source_path fallback
-  - Resilient error handling
-  - Redis TTL heartbeats
-  - Correct contract passing to ChainIngestor
-──────────────────────────────────────────────
+Now supports CLI arguments for group, date, timing, and frequency,
+with sensible market-hour defaults.
 """
 
-import os
-import json
+import argparse
 import time
-import yaml
 import redis
-from datetime import datetime, timezone
+import warnings
+from datetime import datetime, timezone, timedelta
+from config.chainfeed_config_loader import load_groups_config
 from core.providers.historical_provider import HistoricalSnapshotProvider
 from core.chain_ingestor import ChainIngestor
 
 
-# ──────────────────────────────────────────────
+# ─────────────────────────────────────────────
 # Redis setup
-# ──────────────────────────────────────────────
-
-def get_redis_client() -> redis.Redis:
-    """Connect to local Redis."""
+# ─────────────────────────────────────────────
+def connect_redis():
+    r = redis.Redis(host="localhost", port=6379, decode_responses=True)
     try:
-        client = redis.Redis(host="localhost", port=6379, db=0)
-        client.ping()
+        r.ping()
         print("✅ Connected to Redis (localhost:6379)")
-        return client
-    except redis.ConnectionError as e:
-        raise RuntimeError(f"❌ Cannot connect to Redis: {e}")
+    except redis.ConnectionError:
+        raise SystemExit("❌ Redis is not running. Start it first.")
+    return r
 
 
-# ──────────────────────────────────────────────
-# Config loader
-# ──────────────────────────────────────────────
-
-def load_groups_config(path: str = None):
-    """Load YAML group configuration from project root."""
-    if path is None:
-        base_dir = os.path.dirname(os.path.dirname(__file__))
-        path = os.path.join(base_dir, "groups.yaml")
-
-    if not os.path.exists(path):
-        raise FileNotFoundError(f"❌ Missing groups.yaml at {path}")
-
-    with open(path, "r") as f:
-        return yaml.safe_load(f)["groups"]
-
-
-# ──────────────────────────────────────────────
-# Core publishing logic
-# ──────────────────────────────────────────────
-
-def publish_historical_group(group: dict, redis_client: redis.Redis):
-    """Publish normalized historical chains for one group."""
+# ─────────────────────────────────────────────
+# Publishing Logic
+# ─────────────────────────────────────────────
+def publish_historical_group(group, redis_client):
+    """Push all available historical snapshots for this group."""
+    print(f"\n📊 Processing group: {group['name']} ({group['key']})")
     ingestor = ChainIngestor()
     group_key = group["key"]
-    members = group["members"]
-    heartbeat_key = group["heartbeat_key"]
+    published = []
 
-    print(f"\n📊 Processing group: {group['name']} ({group_key})")
-
-    published_symbols = []
-
-    for member in members:
+    for member in group["members"]:
         symbol = member["symbol"]
-        expiration = member.get("expiration")
-        source_path = member.get("source_path") or f"data/formatted_{symbol}.json"
-
-        if not os.path.exists(source_path):
-            print(f"⚠️ Skipping {symbol} — missing source file: {source_path}")
+        path = member.get("source_path")
+        if not path:
+            print(f"⚠️ Skipping {symbol} — missing source file path.")
             continue
-
         try:
-            provider = HistoricalSnapshotProvider(symbol, expiration)
-            snapshot = provider.load_snapshot(source_path)
+            provider = HistoricalSnapshotProvider(symbol)
+            snapshot = provider.load_snapshot(path)
+            normalized = ingestor.normalize(snapshot)
+            if not normalized.get("contracts"):
+                raise ValueError("Snapshot missing 'contracts' key for normalization")
 
-            # --- Intelligent structure detection ---
-            if isinstance(snapshot, dict):
-                if "contracts" in snapshot:
-                    contracts = snapshot["contracts"]
-                elif "results" in snapshot:
-                    contracts = snapshot["results"]
-                else:
-                    raise ValueError("Snapshot missing 'contracts' or 'results' key")
-            elif isinstance(snapshot, list):
-                contracts = snapshot
-            else:
-                raise TypeError(f"Unexpected snapshot type: {type(snapshot)}")
-
-            normalized = ingestor.normalize(contracts)
-
-            # Add metadata back to normalized chain
-            normalized["symbol"] = symbol
-            normalized["expiration"] = expiration
-            normalized["published_at"] = datetime.now(timezone.utc).isoformat()
-
-            # Push to Redis
             redis_key = f"chain:{group_key}:{symbol}:snapshot"
-            redis_client.set(redis_key, json.dumps(normalized))
-            published_symbols.append(symbol)
-
+            redis_client.set(redis_key, str(normalized))
             print(f"✅ Pushed {symbol:<6} → {redis_key}")
-
+            published.append(symbol)
         except Exception as e:
             print(f"❌ Failed to publish {symbol}: {e}")
 
-    # Emit group heartbeat if any member succeeded
-    if published_symbols:
+    if published:
+        hb_key = f"heartbeat:{group_key}"
         heartbeat_data = {
             "group": group_key,
+            "symbols": published,
             "timestamp": datetime.now(timezone.utc).isoformat(),
-            "symbols": published_symbols,
         }
-        redis_client.setex(heartbeat_key, 60, json.dumps(heartbeat_data))
-        print(f"📡 Heartbeat updated → {heartbeat_key}")
+        redis_client.set(hb_key, str(heartbeat_data))
+        redis_client.expire(hb_key, 60)
+        print(f"📡 Heartbeat updated → {hb_key}")
     else:
         print(f"⚠️ No successful symbols in group {group_key}, heartbeat skipped.")
 
 
-# ──────────────────────────────────────────────
-# Run all configured groups
-# ──────────────────────────────────────────────
-
-def run_all_groups():
-    """Run the full feed cycle for all configured groups."""
-    r = get_redis_client()
-    groups = load_groups_config()
-
-    for group in groups:
-        publish_historical_group(group, r)
-
-
-# ──────────────────────────────────────────────
-# Continuous mode
-# ──────────────────────────────────────────────
-
-def watch_all_groups(interval: int = 30):
-    """Continuously run all groups with periodic refresh."""
-    print(f"\n👁️  Starting Historical Feed Manager (interval={interval}s)...\n")
-    while True:
-        try:
-            run_all_groups()
-            time.sleep(interval)
-        except KeyboardInterrupt:
-            print("\n🛑 Historical feed stopped manually.")
-            break
-        except Exception as e:
-            print(f"❌ Unexpected error: {e}")
-            time.sleep(interval)
+# ─────────────────────────────────────────────
+# Time Helpers
+# ─────────────────────────────────────────────
+def parse_time(value, default):
+    """Parse HH:MM strings or return default if blank."""
+    if not value:
+        return default
+    try:
+        hour, minute = map(int, value.split(":"))
+        return value.replace(":", ":")  # Just to ensure consistency
+    except Exception:
+        warnings.warn(f"⚠️ Invalid time '{value}', using default {default}")
+        return default
 
 
-# ──────────────────────────────────────────────
-# Entrypoint
-# ──────────────────────────────────────────────
+def within_market_hours(now, start_time, stop_time):
+    """Return True if current time is between start and stop (inclusive)."""
+    start = datetime.strptime(start_time, "%H:%M:%S").time()
+    stop = datetime.strptime(stop_time, "%H:%M:%S").time()
+    return start <= now.time() <= stop
 
-if __name__ == "__main__":
-    import argparse
 
+# ─────────────────────────────────────────────
+# CLI Entrypoint
+# ─────────────────────────────────────────────
+def main():
     parser = argparse.ArgumentParser(description="Historical Feed Manager")
-    parser.add_argument(
-        "--watch",
-        action="store_true",
-        help="Continuously run in watch mode (default: single run)"
-    )
-    parser.add_argument(
-        "--interval",
-        type=int,
-        default=30,
-        help="Polling interval in seconds (used with --watch)"
-    )
+    parser.add_argument("--group", help="Group key (e.g., spx_complex)")
+    parser.add_argument("--historical-date", help="Date to simulate (YYYY-MM-DD)")
+    parser.add_argument("--start-time", help="Start time (HH:MM 24h)")
+    parser.add_argument("--stop-time", help="Stop time (HH:MM 24h)")
+    parser.add_argument("--frequency", type=int, default=60, help="Frequency in seconds")
+    parser.add_argument("--watch", action="store_true", help="Keep watching and publishing")
+    parser.add_argument("--interval", type=int, default=60, help="Watch interval (seconds)")
     args = parser.parse_args()
 
-    if args.watch:
-        watch_all_groups(interval=args.interval)
-    else:
-        run_all_groups()
+    # ─────────────────────────────────────────────
+    # Market-hour defaults
+    # ─────────────────────────────────────────────
+    start_time = args.start_time or "09:30:01"
+    stop_time = args.stop_time or "15:59:59"
+
+    print(f"🕰️  Historical feed window: {start_time} → {stop_time}")
+
+    r = connect_redis()
+    groups = load_groups_config()
+
+    selected_group = next((g for g in groups if g["key"] == args.group), None)
+    if not selected_group:
+        raise SystemExit(f"❌ Group '{args.group}' not found in configuration.")
+
+    print(f"\n📆 Date: {args.historical_date or 'latest available'}")
+    print(f"⏱️  Frequency: {args.frequency}s")
+
+    try:
+        while True:
+            now = datetime.now()
+            if within_market_hours(now, start_time, stop_time):
+                publish_historical_group(selected_group, r)
+            else:
+                print(f"⏸️  Outside market hours ({start_time}–{stop_time}), waiting...")
+            time.sleep(args.frequency)
+    except KeyboardInterrupt:
+        print("\n🛑 Feed stopped by user.")
+
+
+if __name__ == "__main__":
+    main()

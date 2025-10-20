@@ -1,34 +1,30 @@
-import os
+"""
+config/chainfeed_config_loader.py
+---------------------------------
+Centralized YAML configuration loader for ChainFeed.
+Supports group definitions for feed orchestration.
+"""
+
 import yaml
+import os
 
 
-CONFIG_FILENAME = "chainfeed_control.yaml"
-DEFAULT_CONFIG_PATH = os.path.join(os.path.dirname(__file__), "..", CONFIG_FILENAME)
+def load_groups_config(path: str = None):
+    """
+    Load the YAML configuration that defines asset groups
+    and their member instruments (SPX, ES, SPY, etc.).
+    """
+    if path is None:
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        path = os.path.join(base_dir, "groups.yaml")
 
+    if not os.path.exists(path):
+        raise FileNotFoundError(f"❌ groups.yaml not found at {path}")
 
-class ChainFeedConfig:
-    """Loads and exposes ChainFeed configuration like a dictionary."""
+    with open(path, "r") as f:
+        data = yaml.safe_load(f)
 
-    def __init__(self, config_path: str = DEFAULT_CONFIG_PATH):
-        full_path = os.path.abspath(config_path)
-        if not os.path.exists(full_path):
-            raise FileNotFoundError(f"Config file not found: {full_path}")
+    if not isinstance(data, list):
+        raise ValueError("❌ groups.yaml must contain a top-level list of groups")
 
-        with open(full_path, "r") as f:
-            self._config = yaml.safe_load(f)
-
-    def __getitem__(self, key):
-        return self._config[key]
-
-    def __contains__(self, key):
-        return key in self._config
-
-    def get(self, key, default=None):
-        return self._config.get(key, default)
-
-    def as_dict(self):
-        """Return the entire configuration as a dict."""
-        return dict(self._config)
-
-    def __repr__(self):
-        return f"<ChainFeedConfig keys={list(self._config.keys())}>"
+    return data

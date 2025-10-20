@@ -70,7 +70,7 @@ preflight_check() {
 # ─────────────────────────────────────────────────────────────
 monitor_feed() {
   local pid=$1
-  local logfile=$2
+  local log_file=$2
   local group=$3
   local mode=$4
 
@@ -81,12 +81,12 @@ monitor_feed() {
 
   echo "⚠️  Feed process $pid for [$group | $mode] terminated unexpectedly."
   echo "🔍 Last 10 log lines:"
-  tail -n 10 "$logfile" | sed 's/^/   /'
+  tail -n 10 "$log_file" | sed 's/^/   /'
 
   # Smart exception scan
-  if grep -q "Traceback (most recent call last):" "$logfile"; then
-    echo "❌ Python exception detected in $logfile"
-    grep -E "FileNotFoundError|KeyError|ConnectionRefusedError|RuntimeError" "$logfile" | tail -n 3 | sed 's/^/   /'
+  if grep -q "Traceback (most recent call last):" "$log_file"; then
+    echo "❌ Python exception detected in $log_file"
+    grep -E "FileNotFoundError|KeyError|ConnectionRefusedError|RuntimeError" "$log_file" | tail -n 3 | sed 's/^/   /'
   fi
 
   read -rp "Would you like to restart [$group | $mode]? (y/n): " resp
@@ -133,7 +133,7 @@ show_menu() {
 # ─────────────────────────────────────────────────────────────
 start_feed() {
   local mode="$1"
-  local manager log_dir logfile timestamp pid
+  local manager log_dir log_file timestamp pid
 
   if ! preflight_check; then
     sleep 2
@@ -141,62 +141,65 @@ start_feed() {
     return
   fi
 
-  if [[ "$mode" == "Live" ]]; then
-    manager="python -m core.live_feed_manager"
+  if [[ "$mode" =~ [Ll]ive ]]; then
+    manager="core.live_feed_manager"
     log_dir="$APP_DIR/data/live_logs"
   else
-    manager="python -m core.historical_feed_manager"
+    manager="core.historical_feed_manager"
     log_dir="$APP_DIR/data/historical_logs"
   fi
   mkdir -p "$log_dir"
 
   read -rp "Enter group (spx_complex / ndx_complex): " group
-  timestamp=$(date +"%Y%m%d_%H%M%S")
-  logfile="$log_dir/${mode,,}_${group}_${timestamp}.log"
+  timestamp=$(date -u +"%Y-%m-%dT%H-%M-%SZ")
+  safe_mode=$(echo "$mode" | tr '[:upper:]' '[:lower:]')
+  log_file="$log_dir/${safe_mode}_${group}_${timestamp}.log"
 
   echo "--------------------------------------------"
   echo "📡 Starting $mode Feed for Group: $group"
-  echo "📘 Log File: $logfile"
+  echo "📘 Log File: $log_file"
   echo "--------------------------------------------"
 
-  if [[ "$mode" == "Historical" ]]; then
+  # Ensure Python can find ChainFeed modules
+  export PYTHONPATH="$APP_DIR"
+
+  if [[ "$mode" =~ [Hh]istorical ]]; then
     read -rp "Enter historical date (YYYY-MM-DD): " date
     read -rp "Enter start time (HH:MM 24h): " start_time
     read -rp "Enter frequency in seconds (default 60): " freq
     read -rp "Enter stop time (HH:MM 24h, blank for manual stop): " stop_time
     freq=${freq:-60}
 
-    nohup $manager \
+    nohup python -m "$manager" \
       --group "$group" \
       --historical-date "$date" \
       --start-time "$start_time" \
       --frequency "$freq" \
       --stop-time "$stop_time" \
-      > "$logfile" 2>&1 &
+      > "$log_file" 2>&1 &
   else
-    nohup $manager --group "$group" > "$logfile" 2>&1 &
+    nohup python -m "$manager" --group "$group" >"$log_file" 2>&1 &
   fi
 
   pid=$!
   sleep 2
 
-  # Validate process actually started
   if ! kill -0 "$pid" 2>/dev/null; then
-    echo "❌ $mode Feed failed to start. Check $logfile for details."
-    tail -n 10 "$logfile"
+    echo "❌ $mode Feed failed to start. Check $log_file for details."
+    tail -n 10 "$log_file"
     sleep 2
     return
   fi
 
   echo "✅ $mode Feed started successfully (PID: $pid)"
-  monitor_feed "$pid" "$logfile" "$group" "$mode" &
+  monitor_feed "$pid" "$log_file" "$group" "$mode" &
   sleep 2; show_menu "$mode"
 }
 
 stop_feed() {
   local mode="$1"
   echo "🛑 Stopping all $mode feed processes..."
-  if [[ "$mode" == "Live" ]]; then
+  if [[ "$mode" =~ [Ll]ive ]]; then
     pkill -f "core.live_feed_manager"
   else
     pkill -f "core.historical_feed_manager"
@@ -216,7 +219,7 @@ restart_feed() {
 tail_logs() {
   local mode="$1"
   local log_dir
-  [[ "$mode" == "Live" ]] && log_dir="$APP_DIR/data/live_logs" || log_dir="$APP_DIR/data/historical_logs"
+  [[ "$mode" =~ [Ll]ive ]] && log_dir="$APP_DIR/data/live_logs" || log_dir="$APP_DIR/data/historical_logs"
 
   echo "Available logs:"
   ls -1t "$log_dir" | head -10
@@ -228,7 +231,7 @@ tail_logs() {
 list_jobs() {
   local mode="$1"
   local match
-  [[ "$mode" == "Live" ]] && match="core.live_feed_manager" || match="core.historical_feed_manager"
+  [[ "$mode" =~ [Ll]ive ]] && match="core.live_feed_manager" || match="core.historical_feed_manager"
   echo "📋 Active $mode Feed Jobs:"
   ps aux | grep "$match" | grep -v grep
   read -rp "Press Enter to return..."
@@ -239,5 +242,14 @@ configure_groups() {
   echo "Opening group configuration..."
   nano "$GROUPS_FILE"
 }
+
+# ─────────────────────────────────────────────────────────────
+# 🧩 Entry Point
+# ─────────────────────────────────────────────────────────────
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+  MODE="${1:-live}"   # default to live if not passed
+  echo "🔧 Running feedctl_common.sh directly (mode: $MODE)..."
+  show_menu "$MODE"
+fi
 
 # End of feedctl_common.sh

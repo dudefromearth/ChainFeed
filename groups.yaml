@@ -1,32 +1,19 @@
-# groups.yaml
-# ──────────────────────────────────────────────
-# Defines high-level correlated groups and their members.
+- name: "S&P 500 Complex"
+  key: "spx_complex"
+  members:
+    - symbol: "SPX"
+      source_path: "data/formatted.json"
+    - symbol: "ES"
+      source_path: "data/formatted_ES.json"
+    - symbol: "SPY"
+      source_path: "data/formatted_SPY.json"
 
-groups:
-  - key: spx_complex
-    name: "S&P 500 Complex"
-    heartbeat_key: "heartbeat:spx_complex"
-    members:
-      - symbol: SPX
-        expiration: "2025-10-17"
-        source_path: "data/formatted.json"
-      - symbol: ES
-        expiration: "2025-12-19"
-        source_path: "data/formatted_ES.json"
-      - symbol: SPY
-        expiration: "2025-10-17"
-        source_path: "data/formatted_SPY.json"
-
-  - key: ndx_complex
-    name: "NASDAQ 100 Complex"
-    heartbeat_key: "heartbeat:ndx_complex"
-    members:
-      - symbol: NDX
-        expiration: "2025-10-17"
-        source_path: "data/formatted_NDX.json"
-      - symbol: NQ
-        expiration: "2025-12-19"
-        source_path: "data/formatted_NQ.json"
-      - symbol: QQQ
-        expiration: "2025-10-17"
-        source_path: "data/formatted_QQQ.json"
+- name: "NASDAQ 100 Complex"
+  key: "ndx_complex"
+  members:
+    - symbol: "NDX"
+      source_path: "data/formatted_NDX.json"
+    - symbol: "NQ"
+      source_path: "data/formatted_NQ.json"
+    - symbol: "QQQ"
+      source_path: "data/formatted_QQQ.json"

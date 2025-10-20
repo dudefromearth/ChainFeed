@@ -5,7 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3dcab700-4ada-4568-aa07-958a1371a59f" name="Changes" comment="Weekend design">
-      <change beforePath="$PROJECT_DIR$/READEME.md" beforeDir="false" afterPath="$PROJECT_DIR$/READEME.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ .dockerignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/com.fattail.chainfeed.plist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/live_feed_manager.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/mesh_agent.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/chainfeed_config_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/chainfeed_config_loader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/historical_feed_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/historical_feed_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/groups.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/groups.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/feedctl_common.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/feedctl_common.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/historic_feedctl.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/historic_feedctl.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/live_feedctl.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/live_feedctl.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,6 +170,9 @@
       <workItem from="1760807342699" duration="2666000" />
       <workItem from="1760810021076" duration="183000" />
       <workItem from="1760810216203" duration="12113000" />
+      <workItem from="1760915041866" duration="573000" />
+      <workItem from="1760915625721" duration="7055000" />
+      <workItem from="1760956188512" duration="13000" />
     </task>
     <task id="LOCAL-00007" summary="Initial commit">
       <option name="closed" value="true" />

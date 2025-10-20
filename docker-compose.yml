@@ -1,0 +1,28 @@
+services:
+  redis:
+    image: redis/redis-stack:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  chainfeed_dev:
+    build: .
+    image: chainfeed-node
+    container_name: chainfeed_dev
+    environment:
+      MODE: historical
+      GROUP: spx_complex
+      REDIS_HOST: redis
+      REDIS_PORT: "6379"
+      POLYGON_API_KEY: ${POLYGON_API_KEY}
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+    command: >
+      sh -c "python -m core.historical_feed_manager --group ${GROUP:-spx_complex}"
+
+volumes:
+  redis_data:

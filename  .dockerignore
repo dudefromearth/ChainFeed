@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+*.sqlite3
+.vscode/
+.idea/
+.venv/
+data/live_logs/
+data/historical_logs/
