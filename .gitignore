@@ -1,0 +1,16 @@
+# OS / Editor
+.DS_Store
+.idea/
+__pycache__/
+*.pyc
+
+# Python environments
+.venv/
+.env
+
+# Data & Logs
+data/historical_logs/
+data/live_logs/
+
+# Redis dumps
+dump.rdb

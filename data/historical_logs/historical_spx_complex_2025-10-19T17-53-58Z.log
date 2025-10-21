@@ -1,8 +1,0 @@
-Traceback (most recent call last):
-  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/runpy.py", line 197, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/runpy.py", line 87, in _run_code
-    exec(code, run_globals)
-  File "/Users/ernie/PyCharmProjects/ChainFeed/core/historical_feed_manager.py", line 16, in <module>
-    from config.chainfeed_config_loader import load_groups_config
-ImportError: cannot import name 'load_groups_config' from 'config.chainfeed_config_loader' (/Users/ernie/PyCharmProjects/ChainFeed/config/chainfeed_config_loader.py)
