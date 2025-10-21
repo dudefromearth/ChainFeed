@@ -1,18 +1,15 @@
-# core/redis_keys.py
+# utils/redis_keys.py
+from config.chainfeed_constants import (
+    REDIS_KEYS,
+    KEY_PREFIX,
+    KEY_TEMPLATE_RAW,
+    KEY_TEMPLATE_FULL,
+    KEY_TEMPLATE_DIFF,
+    KEY_TEMPLATE_EXPIRATIONS,
+    KEY_HEARTBEAT,
+)
 
-class RedisKeys:
-    HEARTBEAT = "CHAIN:HEARTBEAT"
-    FULL_FEED = "CHAIN:FEED:FULL"
-    DIFF_FEED = "CHAIN:FEED:DIFF"
-    SIGMA = "CHAIN:SIGMA"
-
-    POINTER_FULL_LATEST = "POINTER:FEED:FULL:LATEST"
-    SYSTEM_LAST_UPDATE = "SYSTEM:LAST_UPDATE"
-
-    @staticmethod
-    def full_key(symbol: str, ts: str) -> str:
-        return f"CHAIN:FEED:FULL:{symbol}:{ts}"
-
-    @staticmethod
-    def diff_key(symbol: str, ts: str) -> str:
-        return f"CHAIN:FEED:DIFF:{symbol}:{ts}"
+# Optional: keep these aliases so older code still works
+HEARTBEAT = KEY_HEARTBEAT
+FULL_FEED = KEY_TEMPLATE_FULL
+DIFF_FEED = KEY_TEMPLATE_DIFF

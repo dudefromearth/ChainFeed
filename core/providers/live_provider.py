@@ -3,7 +3,7 @@ import warnings
 from typing import Optional, Dict
 from core.providers.chain_snapshot_provider import ChainSnapshotProvider
 from core.fetch_chain_snapshot import fetch_chain_snapshot
-from utils.expiration_inspector import ExpirationInspector
+from core.expiration_inspector import ExpirationInspector
 
 
 class LiveSnapshotProvider(ChainSnapshotProvider):

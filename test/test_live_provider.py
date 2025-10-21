@@ -1,7 +1,7 @@
 import pytest
 import warnings
 from core.providers.live_provider import LiveSnapshotProvider
-from utils.expiration_inspector import ExpirationInspector
+from core.expiration_inspector import ExpirationInspector
 
 
 @pytest.fixture

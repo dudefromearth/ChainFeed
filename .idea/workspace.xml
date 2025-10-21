@@ -4,21 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3dcab700-4ada-4568-aa07-958a1371a59f" name="Changes" comment="Weekend design">
-      <change afterPath="$PROJECT_DIR$/ .dockerignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/com.fattail.chainfeed.plist" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/live_feed_manager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/mesh_agent.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+    <list default="true" id="3dcab700-4ada-4568-aa07-958a1371a59f" name="Changes" comment="Docker and Mesh Architecture">
+      <change afterPath="$PROJECT_DIR$/core/expiration_inspector.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/feed_bootstrap.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/heartbeat_startup.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/heartbeat_watcher.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/integration_sync.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/logger.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/chainfeed_config_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/chainfeed_config_loader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/historical_feed_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/historical_feed_manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/groups.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/groups.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/feedctl_common.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/feedctl_common.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/historic_feedctl.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/historic_feedctl.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/live_feedctl.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/live_feedctl.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/chainfeed_constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/chainfeed_constants.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/variant_config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/variant_config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/fetch_chain_snapshot.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/fetch_chain_snapshot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/heartbeat_injector.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/heartbeat_injector.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/providers/live_provider.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/providers/live_provider.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test_expiration_inspector.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_expiration_inspector.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test_live_provider.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_live_provider.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/constants.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/expiration_inspector.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/expiration_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/expiration_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/heartbeat_state.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/heartbeat_watcher.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/heartbeat_watcher_advanced.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/heartbeat_watcher_predictive.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/redis_keys.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/redis_keys.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +52,9 @@
     &quot;accountId&quot;: &quot;f040c648-dce5-4f5d-b1d3-88dcee727392&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
 }</component>
@@ -69,6 +80,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/core" />
       <recent name="$PROJECT_DIR$/notebooks" />
       <recent name="$PROJECT_DIR$/utils" />
       <recent name="$PROJECT_DIR$" />
@@ -173,6 +185,9 @@
       <workItem from="1760915041866" duration="573000" />
       <workItem from="1760915625721" duration="7055000" />
       <workItem from="1760956188512" duration="13000" />
+      <workItem from="1760956208017" duration="3007000" />
+      <workItem from="1760971324026" duration="977000" />
+      <workItem from="1760977693224" duration="9164000" />
     </task>
     <task id="LOCAL-00007" summary="Initial commit">
       <option name="closed" value="true" />
@@ -206,7 +221,15 @@
       <option name="project" value="LOCAL" />
       <updated>1760835908925</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Docker and Mesh Architecture">
+      <option name="closed" value="true" />
+      <created>1760956265186</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1760956265186</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -226,6 +249,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit" />
     <MESSAGE value="Weekend design" />
-    <option name="LAST_COMMIT_MESSAGE" value="Weekend design" />
+    <MESSAGE value="Docker and Mesh Architecture" />
+    <option name="LAST_COMMIT_MESSAGE" value="Docker and Mesh Architecture" />
   </component>
 </project>

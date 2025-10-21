@@ -1,5 +1,5 @@
 # Put this at the top
-from utils.expiration_inspector import ExpirationInspector
+from core.expiration_inspector import ExpirationInspector
 
 VALID_SYMBOL = "SPX"
 INVALID_SYMBOL = "FAKESYMBOL"

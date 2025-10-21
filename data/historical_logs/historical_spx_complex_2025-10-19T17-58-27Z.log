@@ -1,0 +1,907 @@
+/Users/ernie/PyCharmProjects/ChainFeed/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+🕰️  Historical feed window: 09:30:01 → 15:59:59
+✅ Connected to Redis (localhost:6379)
+
+📆 Date: latest available
+⏱️  Frequency: 60s
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+
+📊 Processing group: S&P 500 Complex (spx_complex)
+✅ Pushed SPX    → chain:spx_complex:SPX:snapshot
+❌ Failed to publish ES: ❌ Snapshot file not found: data/formatted_ES.json
+❌ Failed to publish SPY: ❌ Snapshot file not found: data/formatted_SPY.json
+📡 Heartbeat updated → heartbeat:spx_complex
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...
+⏸️  Outside market hours (09:30:01–15:59:59), waiting...

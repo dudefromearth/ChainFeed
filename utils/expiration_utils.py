@@ -1,7 +1,7 @@
 # utils/expiration_utils.py
 
 from typing import List, Optional
-from utils.expiration_inspector import ExpirationInspector
+from core.expiration_inspector import ExpirationInspector
 
 
 def is_valid_expiration(symbol: str, date_str: str) -> bool:

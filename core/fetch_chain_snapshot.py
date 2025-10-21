@@ -2,7 +2,7 @@
 
 import os
 import requests
-from utils.expiration_inspector import ExpirationInspector
+from core.expiration_inspector import ExpirationInspector
 
 POLYGON_API_KEY = os.getenv("POLYGON_API_KEY")
 BASE_URL = "https://api.polygon.io/v3/snapshot/options"

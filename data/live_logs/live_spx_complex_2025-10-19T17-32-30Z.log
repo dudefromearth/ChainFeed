@@ -1,0 +1,1 @@
+/Users/ernie/PyCharmProjects/ChainFeed/.venv/bin/python: Error while finding module specification for 'core.live_feed_manager' (ModuleNotFoundError: No module named 'core')

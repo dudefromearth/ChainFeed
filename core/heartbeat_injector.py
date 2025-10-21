@@ -1,51 +1,83 @@
-import time
-import json
-import redis
-from datetime import datetime, timezone
+"""
+core/heartbeat_injector.py
+--------------------------
 
-from utils.redis_keys import RedisKeys
-from utils.symbol_utils import get_configured_symbols, inspect_symbol_status
+Heartbeat Injector
+
+Publishes periodic heartbeat messages into Redis so other nodes and
+the mesh watcher can monitor liveness and latency.
+Also publishes lightweight real-time mesh:update events for
+FrontEndNode SSE gateways to broadcast.
+"""
+
+import json
+import time
+from datetime import datetime, timezone
+from utils.logger import get_logger
+from utils.redis_client import get_redis_client
+from config.chainfeed_constants import (
+    HEARTBEAT_TTL_SEC,
+    HEARTBEAT_KEY_TEMPLATE,
+    NODE_ID,
+    FEED_GROUPS,
+    HEARTBEAT_VERSION,
+)
+
+# ----------------------------------------------------------
+# Logger and Redis
+# ----------------------------------------------------------
+logger = get_logger("heartbeat.injector")
+redis = get_redis_client()
+
 
 class HeartbeatInjector:
-    def __init__(self, redis_host="localhost", redis_port=6379, interval_sec=3):
-        self.redis = redis.Redis(host=redis_host, port=redis_port, decode_responses=True)
+    """
+    Periodically publishes node heartbeat messages into Redis.
+    Each heartbeat includes node_id, group, timestamp, and schema version.
+    Also emits a mesh:update event for live SSE synchronization.
+    """
+
+    def __init__(self, interval_sec: int = 5):
         self.interval_sec = interval_sec
+        self.node_id = NODE_ID
+        self.groups = FEED_GROUPS or ["index_complex"]
 
-    def make_payload(self):
-        now = datetime.now(timezone.utc).isoformat(timespec="seconds")
-
-        # Discover symbols from current Redis keys or configuration
-        symbols = get_configured_symbols()
-
-        feeds = {}
-        for symbol in symbols:
-            status = inspect_symbol_status(self.redis, symbol)
-            feeds[symbol] = status
-
-        # Determine overall status
-        any_missing = any(not s["full"] or not s["diff"] for s in feeds.values())
-        all_ok = all(s["full"] and s["diff"] and s["live"] for s in feeds.values())
-
-        overall_status = "active" if all_ok else ("idle" if not any_missing else "missing")
-
+    def _build_heartbeat(self, group: str) -> dict:
+        """Construct a heartbeat payload."""
         return {
-            "ts": now,
-            "status": overall_status,
-            "feeds": feeds,
-            "notes": "Auto-generated heartbeat",
-            "source": "heartbeat_injector",
+            "node_id": self.node_id,
+            "group": group,
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "status": "online",
+            "version": HEARTBEAT_VERSION,
         }
 
     def run(self):
-        print(f"[~] Starting Heartbeat Injector, interval={self.interval_sec}s")
+        """Main heartbeat emission loop."""
+        logger.info(f"💓 Heartbeat injector started for node '{self.node_id}'.")
         while True:
-            payload = self.make_payload()
             try:
-                self.redis.set(RedisKeys.HEARTBEAT.value, json.dumps(payload), ex=10)
-                print(f"[✓] Heartbeat @ {payload['ts']}  status={payload['status']}")
+                for group in self.groups:
+                    key = HEARTBEAT_KEY_TEMPLATE.format(group=group)
+                    payload = self._build_heartbeat(group)
+
+                    # Store heartbeat in Redis
+                    redis.set(key, json.dumps(payload), ex=HEARTBEAT_TTL_SEC)
+                    redis.hset("mesh:state", self.node_id, json.dumps(payload))
+
+                    # 🟢 Publish live mesh update event
+                    redis.publish("mesh:update", json.dumps(payload))
+
+                    logger.debug(
+                        f"🩺 Heartbeat sent | group={group} | node={self.node_id}"
+                    )
+
+                time.sleep(self.interval_sec)
+
             except Exception as e:
-                print(f"[!] Redis error: {e}")
-            time.sleep(self.interval_sec)
+                logger.error(f"❌ Heartbeat injector error: {e}", exc_info=True)
+                time.sleep(self.interval_sec * 2)
+
 
 if __name__ == "__main__":
     injector = HeartbeatInjector()
