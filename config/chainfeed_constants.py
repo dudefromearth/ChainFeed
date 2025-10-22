@@ -13,6 +13,9 @@ from this shared schema, either directly or via Redis integration export.
 """
 
 import os
+import socket
+import yaml
+from pathlib import Path
 
 # ==========================================================
 # Versioning
@@ -30,7 +33,28 @@ CHANNEL_PREFIX = "pubsub"
 # ==========================================================
 # Node Identity (auto-detect or override per machine / .env)
 # ==========================================================
-NODE_ID = os.getenv("NODE_ID", "studiotwo_chainfeed")  # unique node name
+# Resolve node identity in the following priority order:
+# 1. NODE_ID environment variable (explicit override)
+# 2. variant_config.yaml (per-node config)
+# 3. hostname-based fallback
+# 4. final hardcoded fallback (legacy)
+
+CONFIG_PATH = Path(__file__).parent / "variant_config.yaml"
+
+try:
+    if CONFIG_PATH.exists():
+        with open(CONFIG_PATH, "r") as f:
+            variant_cfg = yaml.safe_load(f) or {}
+        NODE_ID = os.getenv(
+            "NODE_ID",
+            variant_cfg.get("node_id", f"{socket.gethostname().lower()}_chainfeed")
+        )
+    else:
+        NODE_ID = os.getenv("NODE_ID", f"{socket.gethostname().lower()}_chainfeed")
+except Exception as e:
+    # Absolute fallback for robustness
+    NODE_ID = f"{socket.gethostname().lower()}_chainfeed"
+
 FEED_GROUPS = ["spx_complex", "index_complex", "futures_complex"]
 
 # ==========================================================
