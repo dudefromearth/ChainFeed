@@ -2,12 +2,15 @@
 core/heartbeat_injector.py
 --------------------------
 
-Heartbeat Injector
+Heartbeat Injector (Atomic Mesh Update)
 
 Publishes periodic heartbeat messages into Redis so other nodes and
 the mesh watcher can monitor liveness and latency.
-Also publishes lightweight real-time mesh:update events for
-FrontEndNode SSE gateways to broadcast.
+
+✅ Improvements
+- Uses Redis pipeline (MULTI/EXEC) to update all feed groups atomically.
+- Ensures `mesh:state` never appears partially populated.
+- Still publishes lightweight mesh:update events for FrontEndNode SSE gateways.
 """
 
 import json
@@ -21,6 +24,7 @@ from config.chainfeed_constants import (
     NODE_ID,
     FEED_GROUPS,
     HEARTBEAT_VERSION,
+    MESH_STATE_KEY,
 )
 
 # ----------------------------------------------------------
@@ -34,7 +38,7 @@ class HeartbeatInjector:
     """
     Periodically publishes node heartbeat messages into Redis.
     Each heartbeat includes node_id, group, timestamp, and schema version.
-    Also emits a mesh:update event for live SSE synchronization.
+    Uses a Redis pipeline to ensure atomic mesh:state updates.
     """
 
     def __init__(self, interval_sec: int = 5):
@@ -44,9 +48,13 @@ class HeartbeatInjector:
 
     def _build_heartbeat(self, group: str) -> dict:
         """Construct a heartbeat payload."""
+        # Optional: add group-symbol mapping if available
+        from config.chainfeed_constants import SYMBOL_GROUP_MAP
+        symbols = SYMBOL_GROUP_MAP.get(group, [])
         return {
             "node_id": self.node_id,
             "group": group,
+            "symbols": symbols,
             "timestamp": datetime.now(timezone.utc).isoformat(),
             "status": "online",
             "version": HEARTBEAT_VERSION,
@@ -54,23 +62,35 @@ class HeartbeatInjector:
 
     def run(self):
         """Main heartbeat emission loop."""
-        logger.info(f"💓 Heartbeat injector started for node '{self.node_id}'.")
+        logger.info(f"💓 Heartbeat injector started for node '{self.node_id}' (atomic mode).")
+
         while True:
             try:
+                # --- Begin atomic pipeline ---
+                pipe = redis.pipeline(transaction=True)
+
                 for group in self.groups:
                     key = HEARTBEAT_KEY_TEMPLATE.format(group=group)
                     payload = self._build_heartbeat(group)
 
-                    # Store heartbeat in Redis
-                    redis.set(key, json.dumps(payload), ex=HEARTBEAT_TTL_SEC)
-                    redis.hset("mesh:state", self.node_id, json.dumps(payload))
+                    # Store heartbeat (with TTL)
+                    from utils.redis_client import redis_set_with_policy
+                    redis_set_with_policy(redis, key, json.dumps(payload))
 
-                    # 🟢 Publish live mesh update event
-                    redis.publish("mesh:update", json.dumps(payload))
+                    # Update mesh:state field
+                    mesh_field = f"{self.node_id}:{group}"
+                    pipe.hset(MESH_STATE_KEY, mesh_field, json.dumps(payload))
 
-                    logger.debug(
-                        f"🩺 Heartbeat sent | group={group} | node={self.node_id}"
-                    )
+                    # Publish live mesh update
+                    pipe.publish("mesh:update", json.dumps(payload))
+
+                # Execute all at once
+                pipe.execute()
+                # --- End atomic pipeline ---
+
+                logger.debug(
+                    f"🩺 Atomic heartbeat update complete for node={self.node_id} groups={self.groups}"
+                )
 
                 time.sleep(self.interval_sec)
 

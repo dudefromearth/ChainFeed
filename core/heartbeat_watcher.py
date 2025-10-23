@@ -142,3 +142,11 @@ class HeartbeatWatcher:
 
         except Exception as e:
             logger.error(f"Error syncing mesh state: {e}", exc_info=True)
+
+        # ==========================================================
+        # Runtime Entrypoint
+        # ==========================================================
+        if __name__ == "__main__":
+            print("✅ Heartbeat watcher starting up...")  # <--- add this line for debugging
+            watcher = HeartbeatWatcher()
+            watcher.run()

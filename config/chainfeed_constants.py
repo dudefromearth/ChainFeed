@@ -93,9 +93,16 @@ REDIS_KEYS = {
 }
 
 # ==========================================================
+# TTL Defaults (Seconds)
+# ==========================================================
+HEARTBEAT_TTL_SEC = 15
+FEED_TTL_SEC = 15
+MESH_TTL_SEC = 30
+
+# ==========================================================
 # Heartbeat Configuration
 # ==========================================================
-HEARTBEAT_INTERVAL_SEC = 5
+HEARTBEAT_INTERVAL_SEC = 15
 HEARTBEAT_TTL_SEC = 15
 HEARTBEAT_KEY_TEMPLATE = KEY_HEARTBEAT
 
@@ -111,9 +118,35 @@ MESH_STATE_KEY = "mesh:state"
 # ==========================================================
 # Symbol / Feed Defaults
 # ==========================================================
-DEFAULT_SYMBOLS = ["SPX", "ES", "NDX"]
+DEFAULT_SYMBOLS = ["SPX", "ES", "NDX", "NQ"]
 DEFAULT_FEEDS = ["full", "diff"]
 DEFAULT_GROUPS = ["spx_complex", "ndx_complex", "index_complex", "futures_complex"]
+
+# ==========================================================
+# Symbol-to-Group Mapping (multi-group aware)
+# ==========================================================
+SYMBOL_GROUP_MAP = {
+    # SPX Complex
+    "SPX": ["spx_complex", "index_complex"],
+    "ES": ["spx_complex", "futures_complex"],
+    "SPY": ["spx_complex"],
+
+    # NDX Complex
+    "NDX": ["ndx_complex", "index_complex"],
+    "NQ": ["ndx_complex", "futures_complex"],
+    "QQQ": ["ndx_complex"],
+
+    # Index-only
+    "XSP": ["index_complex"],
+}
+
+# ==========================================================
+# Group-to-Symbol Reverse Mapping
+# ==========================================================
+GROUP_SYMBOL_MAP = {}
+for symbol, groups in SYMBOL_GROUP_MAP.items():
+    for group in groups:
+        GROUP_SYMBOL_MAP.setdefault(group, []).append(symbol)
 
 # ==========================================================
 # Logging Defaults
@@ -135,3 +168,34 @@ CONSTANTS_METADATA = {
     "node_id": NODE_ID,
     "feed_groups": FEED_GROUPS,
 }
+
+# ==========================================================
+# Redis Pipe TTL and Persistence Policy
+# ==========================================================
+# Defines how long each Redis key type should live (in seconds).
+# -1 means "persistent" (no expiry).
+# This is the canonical TTL definition used by all writers.
+
+PIPE_TTL_POLICY = {
+    # --- Meta & Integration (Persistent)
+    "meta:": -1,
+    "config:": -1,
+
+    # --- Mesh & Topology (Semi-Persistent)
+    "mesh:": 600,          # 10 minutes
+
+    # --- Heartbeats (Short-Lived)
+    "heartbeat:": 15,      # Matches HEARTBEAT_TTL_SEC
+
+    # --- Feed Data (Ephemeral, updates rapidly)
+    "chainfeed:": 20,      # Option chain cache or normalized feed data
+    "feed:": 15,           # Real-time feed health
+
+    # --- Expirations (Static Reference)
+    "expirations:": -1,    # Only refreshed by bootstrap
+}
+
+# Helper constants
+DEFAULT_TTL = 15
+PERSISTENT_TTL = -1
+LONG_TTL = 600
