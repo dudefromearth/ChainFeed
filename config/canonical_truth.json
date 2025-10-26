@@ -1,0 +1,211 @@
+{
+  "version": "v1.5.0",
+  "namespace": "chainfeed",
+  "description": "Canonical configuration and integration schema for ChainFeed + Convexity Mesh.",
+
+  "integration": {
+    "schema_key": "truth:integration:schema",
+    "config_key": "truth:config:{node_id}",
+    "meta_constants_key": "truth:meta:constants"
+  },
+
+  "mesh": {
+    "enabled": true,
+    "role_determination": "auto",
+    "state_key": "truth:mesh:state",
+    "nodes_key": "truth:mesh:nodes",
+    "heartbeat_key": "truth:heartbeat:{node_id}",
+    "heartbeat_interval_sec": 15,
+    "heartbeat_ttl_sec": 15,
+    "monitor_check_interval_sec": 5,
+    "max_heartbeat_age_sec": 20,
+    "startup_grace_offset_sec": 2
+  },
+
+  "providers": {
+    "data_providers": {
+      "polygon_api": {
+        "name": "Polygon.io",
+        "type": "equities_options_futures",
+        "priority": 1,
+        "base_url": "https://api.polygon.io",
+        "api_key_env": "POLYGON_API_KEY",
+        "rate_limit_per_min": 300,
+        "status_key": "truth:provider:polygon:status",
+        "supported_symbols": ["SPY", "QQQ", "ES", "NQ"],
+        "enabled": true
+      }
+    },
+
+    "rss_feeds": {
+      "google_alerts": {
+        "name": "Google Alerts",
+        "type": "rss",
+        "is_google_alerts": true,
+        "enabled": true,
+        "poll_interval_sec": 300,
+        "sources": [
+          {
+            "name": "Macro Economy",
+            "url": "https://www.google.com/alerts/feeds/123456789/macro+economy"
+          },
+          {
+            "name": "Options Market Volatility",
+            "url": "https://www.google.com/alerts/feeds/123456789/options+volatility"
+          },
+          {
+            "name": "Federal Reserve",
+            "url": "https://www.google.com/alerts/feeds/123456789/federal+reserve+interest+rates"
+          }
+        ]
+      },
+      "financial_news": {
+        "name": "Financial News Aggregators",
+        "type": "rss",
+        "is_google_alerts": false,
+        "enabled": true,
+        "poll_interval_sec": 120,
+        "sources": [
+      {
+        "name": "BBC World News",
+        "url": "https://feeds.bbci.co.uk/news/world/rss.xml"
+      },
+      {
+        "name": "Yahoo Finance",
+        "url": "https://feeds.finance.yahoo.com/rss/2.0/headline?s=SPY&region=US&lang=en-US"
+      },
+      {
+        "name": "CoinDesk Bitcoin",
+        "url": "https://www.coindesk.com/arc/outboundfeeds/rss/"
+          }
+        ]
+      }
+    },
+
+    "ingestors": {
+      "live_chain_ingestor": {
+        "type": "live_chain_ingestor",
+        "module": "core.ingestors.live_chain_ingestor",
+        "description": "Real-time options chain ingestion from market data providers.",
+        "depends_on": ["polygon_api"],
+        "supported_symbols": ["SPY", "QQQ", "ES", "NQ"],
+        "publish_pattern": "truth:feed:{symbol}:live",
+        "enabled": true
+      },
+      "synthetic_index_feed": {
+        "type": "synthetic_index_feed",
+        "module": "core.services.synthetic_index_service",
+        "description": "Generates blended synthetic indexes (SPX_synth, NDX_synth).",
+        "supported_symbols": ["SPX_synth", "NDX_synth"],
+        "publish_pattern": "truth:spot:{symbol}",
+        "enabled": true
+      },
+      "synthetic_chain_ingestor": {
+        "type": "synthetic_chain_ingestor",
+        "module": "core.ingestors.synthetic_chain_ingestor",
+        "description": "Pattern-based or algorithmic synthetic chain generator for testing, simulation, or research.",
+        "enabled": false
+      },
+      "historical_chain_ingestor": {
+        "type": "historical_chain_ingestor",
+        "module": "core.ingestors.historical_chain_ingestor",
+        "description": "Loads historical option chain data for training and validation.",
+        "enabled": false
+      }
+    }
+  },
+
+  "chainfeed": {
+    "enabled": true,
+    "mode": "auto",
+    "default_symbols": ["SPX", "SPY", "ES", "NDX", "QQQ", "NQ"],
+    "default_feeds": ["full", "diff"],
+    "feed_scope": {
+      "default": {
+        "strikes_above": 30,
+        "strikes_below": 30,
+        "max_total_strikes": 60,
+        "update_interval_sec": 10,
+        "filter_method": "ATM_window",
+        "spot_source": "truth:spot:{symbol}"
+      }
+    },
+    "synthetic_indexes": {
+      "SPX_synth": {
+        "components": [
+          { "symbol": "SPY", "weight": 0.6, "multiplier": 10.0 },
+          { "symbol": "ES", "weight": 0.4, "multiplier": 1.0 }
+        ],
+        "publish_key": "truth:spot:SPX_synth"
+      },
+      "NDX_synth": {
+        "components": [
+          { "symbol": "QQQ", "weight": 0.6, "multiplier": 40.5 },
+          { "symbol": "NQ", "weight": 0.4, "multiplier": 1.0 }
+        ],
+        "publish_key": "truth:spot:NDX_synth"
+      }
+    }
+  },
+
+  "convexity": {
+    "enabled": true,
+    "agent": {
+      "name": "ConvexityGPT",
+      "openai_model": "gpt-5",
+      "api_endpoint": "https://api.openai.com/v1/agents",
+      "path_os_profile": "config/path_os_manifest.json",
+      "playbooks_path": "playbooks/",
+      "subscribe_patterns": [
+        "truth:spot:*",
+        "truth:metrics:*",
+        "truth:prompt:*",
+        "truth:alert:*"
+      ],
+      "publish_channels": {
+        "broadcast": "truth:broadcast:convexity",
+        "insight": "truth:convexity:insight"
+      },
+      "memory": {
+        "runtime_memory_key": "truth:convexity:memory:runtime",
+        "persistent_memory_key": "truth:convexity:memory:persistent",
+        "memory_flush_interval_sec": 3600
+      }
+    }
+  },
+
+  "entities": [
+    {
+      "name": "Convexity Duo",
+      "node_id": "studiotwo.local_chainfeed",
+      "division": "Front Line",
+      "organization": "Fly on the Wall",
+      "role": "communicator",
+      "path_version": "v3.1",
+      "playbooks": [
+        "Convexity Hunter Playbook",
+        "Echo Memory Protocol",
+        "Trade Journaling Playbook"
+      ]
+    }
+  ],
+
+  "logging": {
+    "log_level": "INFO",
+    "log_to_file": true,
+    "file_path": "logs/chainfeed.log"
+  },
+
+  "metadata": {
+    "author": "StudioTwo Build Lab",
+    "last_updated": "2025-10-26T00:00:00Z",
+    "schema_publisher": "integration_sync",
+    "description": "Defines runtime configuration for ChainFeed and Convexity GPT.",
+    "change_log": [
+      "Added mesh heartbeat monitoring cadence (interval, check_interval, max_age, grace).",
+      "Preserved historical provider and ingestor definitions.",
+      "Added Convexity GPT memory configuration and persistence settings.",
+      "Added RSS feed provider definitions (Google Alerts + Financial News)."
+    ]
+  }
+}

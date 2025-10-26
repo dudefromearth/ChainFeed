@@ -1,0 +1,27 @@
+12:13:57 | INFO    | 🌿 ChainFeed Startup Sequence (v0.2)
+12:13:57 | INFO    | 🌱 Beginning startup sequence...
+12:13:57 | INFO    | ✅ Redis connection established at localhost:6379
+12:13:57 | INFO    | 💓 HeartbeatEmitter started (interval=15s) for node: studiotwo.local_chainfeed
+12:13:57 | INFO    | 💓 Heartbeat published → truth:heartbeat:studiotwo.local_chainfeed
+12:13:57 | INFO    | 📡 Published startup phase → redis_connected
+12:13:57 | INFO    | ✅ Canonical truth schema loaded (canonical_truth.json)
+12:13:57 | INFO    | 📡 Published startup phase → truth_loaded
+12:13:57 | INFO    | 🚀 Initializing data providers (stub)...
+12:13:57 | INFO    | ✅ Providers stub started.
+12:13:57 | INFO    | 📡 Published startup phase → providers_initialized
+12:13:57 | INFO    | 🚀 Initializing ingestors (stub)...
+12:13:58 | INFO    | ✅ Ingestors stub started.
+12:13:58 | INFO    | 📡 Published startup phase → ingestors_initialized
+12:13:58 | INFO    | 🚀 Initializing synthetic index service (stub)...
+12:13:58 | INFO    | ✅ Synthetic index stub started.
+12:13:58 | INFO    | 📡 Published startup phase → synthetic_index_initialized
+12:13:58 | INFO    | 🚀 Activating Convexity GPT (stub)...
+12:13:59 | INFO    | ✅ Convexity stub started.
+12:13:59 | INFO    | 📡 Published startup phase → convexity_initialized
+12:13:59 | INFO    | 🌀 Starting runtime loop (stub)...
+12:13:59 | INFO    | ✅ Runtime loop stub started.
+12:13:59 | INFO    | 📡 Published startup phase → runtime_started
+12:13:59 | INFO    | 🌳 ChainFeed startup sequence complete.
+12:13:59 | INFO    | 📡 Published startup phase → startup_complete
+12:13:59 | INFO    | 💓 HeartbeatEmitter will continue running in background.
+12:13:59 | INFO    | 🪶 System startup is complete and stable.

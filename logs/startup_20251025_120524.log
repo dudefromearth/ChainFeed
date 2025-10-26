@@ -1,0 +1,23 @@
+12:05:24 | INFO    | 🌿 ChainFeed Startup Sequence (v0.1)
+12:05:24 | INFO    | 🌱 Beginning startup sequence...
+12:05:24 | INFO    | ✅ Redis connection established at localhost:6379
+12:05:24 | INFO    | 📡 Published startup phase → redis_connected
+12:05:24 | INFO    | ✅ Canonical truth schema loaded (canonical_truth.json)
+12:05:24 | INFO    | 📡 Published startup phase → truth_loaded
+12:05:24 | INFO    | 🚀 Initializing data providers (stub)...
+12:05:25 | INFO    | ✅ Providers stub started.
+12:05:25 | INFO    | 📡 Published startup phase → providers_initialized
+12:05:25 | INFO    | 🚀 Initializing ingestors (stub)...
+12:05:25 | INFO    | ✅ Ingestors stub started.
+12:05:25 | INFO    | 📡 Published startup phase → ingestors_initialized
+12:05:25 | INFO    | 🚀 Initializing synthetic index service (stub)...
+12:05:26 | INFO    | ✅ Synthetic index stub started.
+12:05:26 | INFO    | 📡 Published startup phase → synthetic_index_initialized
+12:05:26 | INFO    | 🚀 Activating Convexity GPT (stub)...
+12:05:26 | INFO    | ✅ Convexity stub started.
+12:05:26 | INFO    | 📡 Published startup phase → convexity_initialized
+12:05:26 | INFO    | 🌀 Starting runtime loop (stub)...
+12:05:27 | INFO    | ✅ Runtime loop stub started.
+12:05:27 | INFO    | 📡 Published startup phase → runtime_started
+12:05:27 | INFO    | 🌳 ChainFeed startup sequence complete.
+12:05:27 | INFO    | 📡 Published startup phase → startup_complete
