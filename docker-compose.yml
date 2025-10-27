@@ -1,28 +1,30 @@
-services:
-  redis:
-    image: redis/redis-stack:latest
-    container_name: redis
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis_data:/data
+# ─────────────────────────────────────────────
+# FOTW Mesh Federation – Project Meridian
+# Docker Compose configuration
+# ChainFeed nodes connect to native Redis
+# ─────────────────────────────────────────────
 
-  chainfeed_dev:
-    build: .
+services:
+  chainfeed_node:
+    build:
+      context: .
+      dockerfile: Dockerfile
     image: chainfeed-node
-    container_name: chainfeed_dev
+    container_name: chainfeed_node
     environment:
-      MODE: historical
-      GROUP: spx_complex
-      REDIS_HOST: redis
-      REDIS_PORT: "6379"
-      POLYGON_API_KEY: ${POLYGON_API_KEY}
+      NODE_ID: ${NODE_ID}
+      ENTITY_NAME: ${ENTITY_NAME}
+      DIVISION: ${DIVISION}
+      MESH_ROLE: ${MESH_ROLE}
+      REDIS_HOST: host.docker.internal
+      REDIS_PORT: 6379
+      MODE: ${MODE}
+      GROUP: ${GROUP}
     volumes:
       - .:/app
-    depends_on:
-      - redis
     command: >
-      sh -c "python -m core.historical_feed_manager --group ${GROUP:-spx_complex}"
+      sh -c "python -m core.startup.startup_sequence --node ${NODE_ID}"
 
-volumes:
-  redis_data:
+networks:
+  default:
+    name: chainfeed_default

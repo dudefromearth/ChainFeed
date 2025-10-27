@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && pip install -r requirements.txt \
     && pip install redis pytest ruff
 
-ENV PYTHONPATH=/app
+ENV PYTHONPATH="/app:${PYTHONPATH}"
 
 # Default entry can be overridden by docker compose `command:`
 CMD ["python", "-m", "core.historical_feed_manager"]

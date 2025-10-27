@@ -22,20 +22,21 @@
     "startup_grace_offset_sec": 2
   },
 
-  "providers": {
-    "data_providers": {
-      "polygon_api": {
-        "name": "Polygon.io",
-        "type": "equities_options_futures",
-        "priority": 1,
-        "base_url": "https://api.polygon.io",
-        "api_key_env": "POLYGON_API_KEY",
-        "rate_limit_per_min": 300,
-        "status_key": "truth:provider:polygon:status",
-        "supported_symbols": ["SPY", "QQQ", "ES", "NQ"],
-        "enabled": true
-      }
-    },
+"providers": {
+  "data_providers": {
+    "polygon_api": {
+      "name": "Polygon.io",
+      "type": "equities_options_futures",
+      "priority": 1,
+      "base_url": "https://api.polygon.io/v3/snapshot/options",
+      "api_key_env": "R5TbDLsxMtu8vQvUlax8Af9tJwGevvOl",
+      "api_key": "R5TbDLsxMtu8vQvUlax8Af9tJwGevvOl",
+      "rate_limit_per_min": 300,
+      "status_key": "truth:provider:polygon:status",
+      "supported_symbols": ["SPY", "QQQ", "ES", "NQ"],
+      "enabled": true
+    }
+  },
 
     "rss_feeds": {
       "google_alerts": {
@@ -46,12 +47,12 @@
         "poll_interval_sec": 300,
         "sources": [
           {
-            "name": "Macro Economy",
-            "url": "https://www.google.com/alerts/feeds/123456789/macro+economy"
+            "name": "Jerome Powell",
+            "url": "https://www.google.com/alerts/feeds/18068156851767145348/15070650452603148120"
           },
           {
-            "name": "Options Market Volatility",
-            "url": "https://www.google.com/alerts/feeds/123456789/options+volatility"
+            "name": "Federal Reserve",
+            "url": "https://www.google.com/alerts/feeds/18068156851767145348/16226651122679848636"
           },
           {
             "name": "Federal Reserve",
@@ -120,6 +121,11 @@
     "mode": "auto",
     "default_symbols": ["SPX", "SPY", "ES", "NDX", "QQQ", "NQ"],
     "default_feeds": ["full", "diff"],
+    "raw": {
+      "enabled": true,
+      "interval_sec": 15,
+      "ttl_sec": 300
+    },
     "feed_scope": {
       "default": {
         "strikes_above": 30,

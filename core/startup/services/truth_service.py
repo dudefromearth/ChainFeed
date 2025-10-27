@@ -1,112 +1,162 @@
 #!/usr/bin/env python3
 # ===============================================================
-# 🌿 TruthService – Canonical Truth Manager
+# 🌿 ChainFeed – Truth Service (v2.0, Type-Safe)
 # ===============================================================
 # Author:  StudioTwo Build Lab / Convexity GPT
 # Date:    2025-10-26
 #
 # Purpose:
 # --------
-# Manages the canonical truth lifecycle:
-#   - Loads from local seed file (canonical_truth.json)
-#   - Syncs with Redis (truth:integration:schema)
-#   - Publishes updates and listens for live schema changes
+# Manages canonical truth data shared across ChainFeed nodes.
+# Loads and publishes the local truth schema, synchronizes
+# with Redis, and listens for external updates.
 #
-# Provides a stable interface for the Startup Orchestrator.
+# v2.0 Changes:
+#   • Integrated TruthSchemaPayload / TruthUpdatePayload
+#   • Type-safe Redis serialization (.to_json)
+#   • Schema version consistency enforcement
+#   • Clean startup and listener shutdown
 # ===============================================================
 
 import json
+import threading
+import time
 from datetime import datetime, timezone
-from pathlib import Path
-from core.listeners.truth_listener import TruthListener
+
+from core.models.truth_models import TruthSchemaPayload, TruthUpdatePayload
 
 
 class TruthService:
-    def __init__(self, redis_client, logger, schema_path="config/canonical_truth.json"):
+    """Central authority for canonical truth schema."""
+
+    def __init__(self, redis_client, logger):
         self.redis = redis_client
         self.logger = logger
-        self.schema_path = Path(schema_path)
-        self.truth_cfg = {}
-        self.listener = None
+        self.truth_cfg = None
+        self.listener_thread = None
+        self.running = False
+        self.key_canonical = "truth:integration:schema"
+        self.channel_updates = "truth:update:schema"
 
     # -----------------------------------------------------------
-    # 🌿 Load + Sync Truth
+    # 🌱 Load Canonical Truth from File
+    # -----------------------------------------------------------
+    def load_canonical_truth(self, file_path="canonical_truth.json"):
+        """Loads canonical truth from JSON file."""
+        possible_paths = [
+            file_path,
+            f"./{file_path}",
+            f"./config/{file_path}",  # ✅ Add this line
+            f"./core/config/{file_path}",
+            f"/app/{file_path}",
+            f"/app/config/{file_path}",  # ✅ Add this too for Docker compatibility
+            f"/app/core/config/{file_path}"
+        ]
+
+        for path in possible_paths:
+            try:
+                with open(path, "r") as f:
+                    self.truth_cfg = json.load(f)
+                    version = self.truth_cfg.get("version", "v1.0")
+                    self.logger.info(f"📄 Loaded seed truth from {path} (vv{version})")
+                    return self.truth_cfg
+            except FileNotFoundError:
+                continue
+            except Exception as e:
+                self.logger.error(f"❌ Error reading truth file {path}: {e}", exc_info=True)
+
+        self.logger.error(f"❌ No canonical truth file found in {possible_paths}")
+        raise FileNotFoundError("canonical_truth.json not found in known locations.")
+
+    # -----------------------------------------------------------
+    # 📡 Publish Canonical Truth to Redis
+    # -----------------------------------------------------------
+    def publish_truth(self):
+        """Publishes the loaded truth schema to Redis as a typed payload."""
+        if not self.truth_cfg:
+            self.logger.error("❌ Cannot publish truth: No schema loaded.")
+            return
+
+        payload = TruthSchemaPayload(
+            version=self.truth_cfg.get("version", "v1.0"),
+            schema=self.truth_cfg,
+            source_node="local",
+            timestamp=datetime.now(timezone.utc).isoformat()
+        )
+
+        self.redis.set(self.key_canonical, payload.to_json())
+        self.logger.info(f"📡 Published canonical truth → {self.key_canonical}")
+
+    # -----------------------------------------------------------
+    # 🔄 Synchronize Truth with Redis
+    # -----------------------------------------------------------
+    def sync_with_redis(self):
+        """Checks if Redis truth is newer or older than local copy."""
+        try:
+            redis_data = self.redis.get(self.key_canonical)
+            if redis_data:
+                redis_truth = json.loads(redis_data)
+                redis_version = redis_truth.get("version", "v0.0")
+
+                local_version = self.truth_cfg.get("version", "v0.0")
+                if redis_version > local_version:
+                    self.truth_cfg = redis_truth.get("schema", self.truth_cfg)
+                    self.logger.info(f"📦 Adopted newer truth from Redis (vv{redis_version})")
+                else:
+                    self.logger.info(f"📦 Redis truth older or equal; keeping local (vv{local_version})")
+            else:
+                self.logger.warning("⚠️ No truth found in Redis. Publishing local seed version.")
+                self.publish_truth()
+        except Exception as e:
+            self.logger.error(f"❌ Failed to synchronize truth with Redis: {e}", exc_info=True)
+
+    # -----------------------------------------------------------
+    # 👂 Start Truth Listener Thread
+    # -----------------------------------------------------------
+    def start_listener(self):
+        """Subscribes to schema update notifications in Redis."""
+        def _listen():
+            pubsub = self.redis.pubsub(ignore_subscribe_messages=True)
+            pubsub.subscribe(self.channel_updates)
+            self.logger.info(f"📡 Subscribed to {self.channel_updates} channel.")
+            while self.running:
+                try:
+                    message = pubsub.get_message(timeout=1)
+                    if not message:
+                        continue
+
+                    if message["type"] == "message":
+                        data = json.loads(message["data"])
+                        update = TruthUpdatePayload(**data)
+                        self.logger.info(f"🔄 TruthListener received new schema (vv{update.version})")
+                        self.truth_cfg = update.schema
+                except Exception as e:
+                    self.logger.error(f"❌ TruthListener error: {e}", exc_info=True)
+                    time.sleep(1)
+
+        self.running = True
+        self.listener_thread = threading.Thread(target=_listen, daemon=True)
+        self.listener_thread.start()
+        self.logger.info("👂 TruthListener started.")
+
+    # -----------------------------------------------------------
+    # 🚀 Start Truth Service
     # -----------------------------------------------------------
     def start(self):
+        """Loads truth, syncs with Redis, publishes, and starts listener."""
         self.logger.info("📖 Starting TruthService...")
-        self._load_truth()
-        self._start_listener()
+        self.load_canonical_truth()
+        self.sync_with_redis()
+        self.publish_truth()
+        self.start_listener()
         self.logger.info("✅ TruthService initialized and listening for updates.")
 
+    # -----------------------------------------------------------
+    # 🛑 Stop Truth Service
+    # -----------------------------------------------------------
     def stop(self):
-        if self.listener:
-            self.listener.stop()
-            self.logger.info("👂 TruthListener stopped gracefully.")
-
-    # -----------------------------------------------------------
-    # 🌿 Load Truth from File and Redis
-    # -----------------------------------------------------------
-    def _load_truth(self):
-        local_truth = {}
-        if self.schema_path.exists():
-            with open(self.schema_path, "r") as f:
-                local_truth = json.load(f)
-            self.logger.info(f"📄 Loaded seed truth from {self.schema_path.name}")
-
-        redis_raw = self.redis.get("truth:integration:schema")
-        if redis_raw:
-            redis_truth = json.loads(redis_raw)
-            redis_ver = redis_truth.get("version")
-            local_ver = local_truth.get("version")
-
-            def vnum(v): return [int(x) for x in v.strip("v").split(".")]
-            if not local_ver or vnum(redis_ver) > vnum(local_ver):
-                self.logger.info(f"🌀 Using newer truth from Redis (v{redis_ver})")
-                self.truth_cfg = redis_truth
-            else:
-                self.logger.info(f"📦 Redis truth older or equal; keeping local (v{local_ver})")
-                self.truth_cfg = local_truth
-                self._publish_truth(local_truth)
-        else:
-            self.logger.warning("⚠️ No truth found in Redis. Publishing local seed version.")
-            self.truth_cfg = local_truth
-            self._publish_truth(local_truth)
-
-    # -----------------------------------------------------------
-    # 🌿 Publish Truth to Redis
-    # -----------------------------------------------------------
-    def _publish_truth(self, truth_dict):
-        self.redis.set("truth:integration:schema", json.dumps(truth_dict))
-        self.logger.info("📡 Published canonical truth → truth:integration:schema")
-
-    # -----------------------------------------------------------
-    # 🌿 Publish Truth Update
-    # -----------------------------------------------------------
-    def publish_update(self):
-        old_ver = self.truth_cfg.get("version", "v0.0.0")
-        v_parts = [int(x) for x in old_ver.strip("v").split(".")]
-        v_parts[-1] += 1
-        new_ver = f"v{'.'.join(map(str, v_parts))}"
-
-        self.truth_cfg["version"] = new_ver
-        self.truth_cfg["metadata"]["last_updated"] = datetime.now(timezone.utc).isoformat()
-        self.redis.set("truth:integration:schema", json.dumps(self.truth_cfg))
-        self.redis.publish("truth:update:schema", new_ver)
-        self.logger.info(f"📡 Truth update published → {new_ver}")
-
-    # -----------------------------------------------------------
-    # 🌿 Start Truth Listener
-    # -----------------------------------------------------------
-    def _start_listener(self):
-        def on_update(new_truth):
-            self.logger.info(f"🔄 TruthListener received new schema (v{new_truth.get('version')})")
-            self.truth_cfg = new_truth
-
-        self.listener = TruthListener(
-            redis_client=self.redis,
-            on_update_callback=on_update,
-            poll_interval=5,
-            logger=self.logger
-        )
-        self.listener.start()
-        self.logger.info("👂 TruthListener started.")
+        """Stops the truth listener thread gracefully."""
+        self.running = False
+        if self.listener_thread and self.listener_thread.is_alive():
+            self.listener_thread.join(timeout=3)
+        self.logger.info("👂 TruthListener stopped gracefully.")

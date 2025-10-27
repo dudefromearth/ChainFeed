@@ -17,11 +17,12 @@
 #   • Graceful shutdown for RSS Feed Ingestors
 # ===============================================================
 
+import logging
 import os
+import redis
 import json
 import time
-import redis
-import logging
+import threading
 from datetime import datetime, timezone
 
 from core.startup.services.truth_service import TruthService
@@ -96,20 +97,59 @@ class StartupSequence:
             raise
 
     # -----------------------------------------------------------
-    # 🌿 Step 3: Feed Orchestration Service
+    # 🌿 Step 3: Feed Orchestration Service (Simplified)
     # -----------------------------------------------------------
     def init_feed_service(self):
+        """Initializes the ChainFeed fetching system (stub for now)."""
         try:
-            self.logger.info("🚀 Initializing Feed Orchestration Service...")
-            service = FeedOrchestrationService(
-                self.redis_client, self.truth_cfg, self.logger
-            )
-            service.start()
-            self.status["feed_service"] = "ok"
-            self.logger.info("✅ Feed Orchestration Service initialized.")
+            self.logger.info("🚀 Initializing ChainFeed Fetch Service (stub)...")
+
+            # 👇 Safe no-op operation to satisfy IDE and type checkers
+            _ = self.truth_cfg.get("chainfeed", {})  # harmless reference to config
+
+            # This is where we’ll later initialize the PolygonFetcher or others.
+            self.status["feed_service"] = "stub"
+            self.publish_status("feed_service_initialized")
+            self.logger.info("✅ ChainFeed Fetch Service stub initialized successfully.")
+
         except Exception as e:
             self.logger.error(f"❌ Feed Orchestration Service startup failed: {e}", exc_info=True)
             self.status["feed_service"] = "error"
+
+    # -----------------------------------------------------------
+    # 🌿 Step 3.7: Diff Transform Service
+    # -----------------------------------------------------------
+    def init_diff_transform_service(self):
+        """Starts the DiffTransformService for continuous feed deltas."""
+        try:
+            from core.services.diff_transform_service import DiffTransformService
+
+            chainfeed_cfg = self.truth_cfg.get("chainfeed", {})
+            symbols = chainfeed_cfg.get("default_symbols", [])
+            interval = int(chainfeed_cfg.get("diff_interval_sec", 10))
+
+            if not symbols:
+                self.logger.info("ℹ️ No symbols defined for DiffTransformService.")
+                return
+
+            self.logger.info("🚀 Initializing DiffTransformService...")
+
+            self.diff_service = DiffTransformService(
+                redis_client=self.redis_client,
+                symbols=symbols,
+                interval_sec=interval,
+                logger=self.logger
+            )
+            self.diff_service.start()
+
+            self.status["diff_transform"] = "active"
+            self.publish_status("diff_transform_active")
+            self.logger.info(f"✅ DiffTransformService initialized and active ({interval}s interval).")
+
+        except Exception as e:
+            self.logger.error(f"❌ Failed to initialize DiffTransformService: {e}", exc_info=True)
+            self.status["diff_transform"] = "error"
+            self.publish_status("diff_transform_error")
 
     # -----------------------------------------------------------
     # 🌿 Step 3.5: RSS Feed Ingestion Service
@@ -257,6 +297,13 @@ class StartupSequence:
         self.init_core_services()
         self.publish_status("core_services_started")
 
+        # Step 3 — Feed Orchestration Service
+        self.init_feed_service()
+        self.publish_status("feed_service_initialized")
+
+        # Step 3.7 — Diff Transform Service
+        self.init_diff_transform_service()
+
         # Step 3.5 — RSS Feed Ingestion
         self.logger.info("🗞️ Initializing RSS Feed Ingestors...")
         try:
@@ -267,10 +314,6 @@ class StartupSequence:
             self.logger.error(f"❌ RSS Feed Ingestion Service failed: {e}", exc_info=True)
             self.status["rss_feeds"] = "error"
             self.publish_status("rss_feeds_failed")
-
-        # Step 3.5 — RSS Feeds
-        self.init_rss_feeds()
-        self.publish_status("rss_feeds_initialized")
 
         # Step 4 — Synthetic Spot Service
         self.init_synthetic_spot_service()
@@ -316,8 +359,18 @@ class StartupSequence:
 
                 # --- Final heartbeat before stop ---
                 if self.heartbeat_service and self.heartbeat_service.emitter:
-                    self.heartbeat_service.emitter.send_heartbeat(status="shutting_down")
-                    self.logger.info("💓 Final heartbeat (shutting_down) sent.")
+                    try:
+                        node_id = getattr(self.heartbeat_service, "node_id", "unknown")
+                        payload = {
+                            "timestamp": datetime.now(timezone.utc).isoformat(),
+                            "status": "shutting_down",
+                            "node_id": node_id
+                        }
+                        heartbeat_key = f"truth:heartbeat:{node_id}"
+                        self.redis_client.set(heartbeat_key, json.dumps(payload))
+                        self.logger.info(f"💓 Final heartbeat (shutting_down) written to {heartbeat_key}.")
+                    except Exception as e:
+                        self.logger.error(f"Error writing final heartbeat: {e}", exc_info=True)
 
                 # --- Gracefully stop RSS feed threads ---
                 if hasattr(self, "rss_ingestors") and self.rss_ingestors:
@@ -328,6 +381,10 @@ class StartupSequence:
                             self.logger.info(f"🪶 RSS ingestor stopped → {ingestor.cfg.get('name', 'unknown')}")
                         except Exception as e:
                             self.logger.error(f"Error stopping RSS ingestor: {e}", exc_info=True)
+
+                if hasattr(self, "diff_service") and self.diff_service:
+                    self.logger.info("🛑 Stopping DiffTransformService...")
+                    self.diff_service.stop()
 
                 # --- Allow observers to register the shutdown ---
                 shutdown_delay = int(os.getenv("SHUTDOWN_GRACE_DELAY", "5"))

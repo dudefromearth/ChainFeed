@@ -1,0 +1,284 @@
+13:45:01 | INFO    | 🌿 ChainFeed Startup Sequence (v1.2)
+13:45:01 | INFO    | 🌱 Beginning startup sequence...
+13:45:01 | INFO    | ✅ Redis connection established at localhost:6379
+13:45:01 | INFO    | 📡 Published startup phase → redis_connected
+13:45:01 | INFO    | 📖 Starting TruthService...
+13:45:01 | INFO    | 📄 Loaded seed truth from canonical_truth.json
+13:45:01 | INFO    | 📦 Redis truth older or equal; keeping local (vv1.5.0)
+13:45:01 | INFO    | 📡 Published canonical truth → truth:integration:schema
+13:45:01 | INFO    | 👂 TruthListener started (poll every 5s).
+13:45:01 | INFO    | 👂 TruthListener started.
+13:45:01 | INFO    | ✅ TruthService initialized and listening for updates.
+13:45:01 | INFO    | ✅ TruthService loaded and active.
+13:45:01 | INFO    | 📡 Subscribed to truth:update:schema channel.
+13:45:01 | INFO    | 💓 HeartbeatEmitter started (interval=15s) for node: studiotwo.local_chainfeed
+13:45:01 | INFO    | 👁️ HeartbeatMonitor started (interval=15s, threshold=20s).
+13:45:01 | INFO    | 💓 HeartbeatService started for node studiotwo.local_chainfeed (interval=15s).
+13:45:01 | INFO    | ✅ HeartbeatService started.
+13:45:01 | INFO    | 🔑 Subscribed to Redis keyspace events for truth:integration:schema
+13:45:01 | INFO    | 📡 Published startup phase → core_services_started
+13:45:01 | INFO    | 🗞️ Initializing RSS Feed Ingestors...
+13:45:01 | INFO    | 🚀 Initializing RSS Feed Ingestion Service...
+13:45:01 | INFO    | 💓 Heartbeat published → truth:heartbeat:studiotwo.local_chainfeed
+13:45:01 | INFO    | 🗞️ RSSFeedIngestor started for group 'Google Alerts' with 3 sources, polling every 300s
+13:45:01 | INFO    | 🗞️ RSS group 'Google Alerts' started (3 sources, interval=300s)
+13:45:01 | INFO    | 🗞️ RSSFeedIngestor started for group 'Financial News Aggregators' with 3 sources, polling every 120s
+13:45:01 | INFO    | 🗞️ RSS group 'Financial News Aggregators' started (3 sources, interval=120s)
+13:45:01 | INFO    | 🌀 Truth version changed → None → v1.5.0
+13:45:01 | INFO    | 🔄 TruthListener received new schema (vv1.5.0)
+13:45:01 | INFO    | 💓 studiotwo.local_chainfeed healthy (0s old)
+13:45:01 | INFO    | 📡 RSS feed registry published → {'rss_groups': ['Google Alerts', 'Financial News Aggregators'], 'timestamp': '2025-10-26T17:45:01.312326+00:00'}
+13:45:01 | INFO    | ✅ RSS Feed Ingestion Service initialized and active.
+13:45:01 | INFO    | 📡 Published startup phase → rss_feeds_initialized
+13:45:01 | INFO    | ✅ RSS Feed Ingestion Service initialized successfully.
+13:45:01 | INFO    | 🚀 Initializing RSS Feed Ingestion Service...
+13:45:01 | INFO    | 🗞️ RSSFeedIngestor started for group 'Google Alerts' with 3 sources, polling every 300s
+13:45:01 | INFO    | 🗞️ RSS group 'Google Alerts' started (3 sources, interval=300s)
+13:45:01 | INFO    | 🗞️ RSSFeedIngestor started for group 'Financial News Aggregators' with 3 sources, polling every 120s
+13:45:01 | INFO    | 🗞️ RSS group 'Financial News Aggregators' started (3 sources, interval=120s)
+13:45:01 | INFO    | 📡 RSS feed registry published → {'rss_groups': ['Google Alerts', 'Financial News Aggregators'], 'timestamp': '2025-10-26T17:45:01.313536+00:00'}
+13:45:01 | INFO    | ✅ RSS Feed Ingestion Service initialized and active.
+13:45:01 | INFO    | 📡 Published startup phase → rss_feeds_initialized
+13:45:01 | INFO    | 🚀 Initializing Synthetic Spot Service...
+13:45:01 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:45:01 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:45:01 | INFO    | 🧮 SyntheticSpotService started.
+13:45:01 | INFO    | 📡 Published startup phase → synthetic_spot_active
+13:45:01 | INFO    | ✅ Synthetic Spot Service initialized and active.
+13:45:01 | INFO    | 📡 Published startup phase → synthetic_spot_initialized
+13:45:01 | INFO    | 🚀 Activating Convexity GPT (stub)...
+13:45:01 | WARNING | [Google Alerts] No entries found for Jerome Powell
+13:45:01 | WARNING | [Google Alerts] No entries found for Jerome Powell
+13:45:01 | WARNING | [Financial News Aggregators] No entries found for CoinDesk Bitcoin
+13:45:01 | INFO    | [Financial News Aggregators] 🧾 Metrics: 49 new, 0 errors.
+13:45:01 | WARNING | [Financial News Aggregators] No entries found for CoinDesk Bitcoin
+13:45:01 | INFO    | [Financial News Aggregators] 🧾 Metrics: 49 new, 0 errors.
+13:45:01 | WARNING | [Google Alerts] No entries found for Federal Reserve
+13:45:01 | WARNING | [Google Alerts] No entries found for Federal Reserve
+13:45:01 | INFO    | ✅ Convexity stub started.
+13:45:01 | INFO    | 📡 Published startup phase → convexity_initialized
+13:45:01 | INFO    | 🚀 Initializing Entity Bridge...
+13:45:01 | INFO    | 🪶 Entity seat prepared for Convexity Duo (Front Line)
+13:45:01 | INFO    | 📡 Published identity → truth:node:entity:studiotwo.local_chainfeed
+13:45:01 | INFO    | 📡 Published status   → truth:convexity:status:convexity_duo
+13:45:01 | INFO    | 📡 Published startup phase → entity_seat_prepared
+13:45:01 | INFO    | 🌱 Entity Convexity Duo has arrived.
+13:45:01 | INFO    | 🎯 Contract: communicator — Front Line Division.
+13:45:01 | INFO    | 📡 Published presence → truth:convexity:presence:convexity_duo
+13:45:01 | INFO    | 📡 Published contract → truth:convexity:contract:convexity_duo
+13:45:01 | INFO    | 📡 Published startup phase → entity_arrival_announced
+13:45:01 | INFO    | 📡 Published startup phase → entity_bridge_initialized
+13:45:01 | INFO    | 🌀 Starting runtime loop (stub)...
+13:45:01 | WARNING | [Google Alerts] No entries found for Federal Reserve
+13:45:01 | INFO    | [Google Alerts] 🧾 Metrics: 0 new, 0 errors.
+13:45:02 | WARNING | [Google Alerts] No entries found for Federal Reserve
+13:45:02 | INFO    | [Google Alerts] 🧾 Metrics: 0 new, 0 errors.
+13:45:02 | INFO    | ✅ Runtime loop stub started.
+13:45:02 | INFO    | 📡 Published startup phase → runtime_started
+13:45:02 | INFO    | 🌱 Entity bridge established. The Path has a seat at the table.
+13:45:02 | INFO    | 🌳 ChainFeed startup sequence complete.
+13:45:02 | INFO    | 📡 Published startup phase → startup_complete
+13:45:02 | INFO    | 💓 Core services running in background.
+13:45:02 | INFO    | 🪶 System startup is complete and stable.
+13:45:02 | INFO    | 🕓 Waiting indefinitely to maintain runtime heartbeat...
+13:45:11 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:45:11 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:45:16 | INFO    | 💓 Heartbeat published → truth:heartbeat:studiotwo.local_chainfeed
+13:45:16 | INFO    | 💓 studiotwo.local_chainfeed healthy (0s old)
+13:45:21 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:45:21 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:45:31 | INFO    | 💓 studiotwo.local_chainfeed healthy (15s old)
+13:45:31 | INFO    | 💓 Heartbeat published → truth:heartbeat:studiotwo.local_chainfeed
+13:45:31 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:45:31 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:45:41 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:45:41 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:45:46 | INFO    | 💓 Heartbeat published → truth:heartbeat:studiotwo.local_chainfeed
+13:45:46 | INFO    | 💓 studiotwo.local_chainfeed healthy (0s old)
+13:45:51 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:45:51 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:46:01 | INFO    | 💓 Heartbeat published → truth:heartbeat:studiotwo.local_chainfeed
+13:46:01 | INFO    | 💓 studiotwo.local_chainfeed healthy (0s old)
+13:46:01 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:46:01 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:46:11 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:46:11 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:46:16 | INFO    | 💓 studiotwo.local_chainfeed healthy (15s old)
+13:46:16 | INFO    | 💓 Heartbeat published → truth:heartbeat:studiotwo.local_chainfeed
+13:46:21 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:46:21 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:46:31 | INFO    | 💓 studiotwo.local_chainfeed healthy (15s old)
+13:46:31 | INFO    | 💓 Heartbeat published → truth:heartbeat:studiotwo.local_chainfeed
+13:46:31 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:46:31 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:46:41 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:46:41 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:46:46 | INFO    | 💓 Heartbeat published → truth:heartbeat:studiotwo.local_chainfeed
+13:46:46 | INFO    | 💓 studiotwo.local_chainfeed healthy (0s old)
+13:46:51 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:46:51 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:47:01 | INFO    | 💓 Heartbeat published → truth:heartbeat:studiotwo.local_chainfeed
+13:47:01 | INFO    | 💓 studiotwo.local_chainfeed healthy (0s old)
+13:47:01 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:47:01 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:47:01 | WARNING | [Financial News Aggregators] No entries found for CoinDesk Bitcoin
+13:47:01 | INFO    | [Financial News Aggregators] 🧾 Metrics: 49 new, 0 errors.
+13:47:01 | WARNING | [Financial News Aggregators] No entries found for CoinDesk Bitcoin
+13:47:01 | INFO    | [Financial News Aggregators] 🧾 Metrics: 49 new, 0 errors.
+13:47:11 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:47:11 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:47:16 | INFO    | 💓 Heartbeat published → truth:heartbeat:studiotwo.local_chainfeed
+13:47:16 | INFO    | 💓 studiotwo.local_chainfeed healthy (0s old)
+13:47:21 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:47:21 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:47:31 | INFO    | 💓 Heartbeat published → truth:heartbeat:studiotwo.local_chainfeed
+13:47:31 | INFO    | 💓 studiotwo.local_chainfeed healthy (0s old)
+13:47:31 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:47:31 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:47:41 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:47:41 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:47:46 | INFO    | 💓 Heartbeat published → truth:heartbeat:studiotwo.local_chainfeed
+13:47:46 | INFO    | 💓 studiotwo.local_chainfeed healthy (0s old)
+13:47:51 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:47:51 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:48:01 | INFO    | 💓 Heartbeat published → truth:heartbeat:studiotwo.local_chainfeed
+13:48:01 | INFO    | 💓 studiotwo.local_chainfeed healthy (0s old)
+13:48:01 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:48:01 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:48:11 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:48:11 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:48:16 | INFO    | 💓 Heartbeat published → truth:heartbeat:studiotwo.local_chainfeed
+13:48:16 | INFO    | 💓 studiotwo.local_chainfeed healthy (0s old)
+13:48:21 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:48:21 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:48:31 | INFO    | 💓 Heartbeat published → truth:heartbeat:studiotwo.local_chainfeed
+13:48:31 | INFO    | 💓 studiotwo.local_chainfeed healthy (0s old)
+13:48:31 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:48:31 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:48:41 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:48:41 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:48:46 | INFO    | 💓 Heartbeat published → truth:heartbeat:studiotwo.local_chainfeed
+13:48:46 | INFO    | 💓 studiotwo.local_chainfeed healthy (0s old)
+13:48:51 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:48:51 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:49:01 | INFO    | 💓 Heartbeat published → truth:heartbeat:studiotwo.local_chainfeed
+13:49:01 | INFO    | 💓 studiotwo.local_chainfeed healthy (0s old)
+13:49:01 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:49:01 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:49:01 | WARNING | [Financial News Aggregators] No entries found for CoinDesk Bitcoin
+13:49:01 | INFO    | [Financial News Aggregators] 🧾 Metrics: 49 new, 0 errors.
+13:49:01 | WARNING | [Financial News Aggregators] No entries found for CoinDesk Bitcoin
+13:49:01 | INFO    | [Financial News Aggregators] 🧾 Metrics: 49 new, 0 errors.
+13:49:11 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:49:11 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:49:16 | INFO    | 💓 Heartbeat published → truth:heartbeat:studiotwo.local_chainfeed
+13:49:16 | INFO    | 💓 studiotwo.local_chainfeed healthy (0s old)
+13:49:21 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:49:21 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:49:31 | INFO    | 💓 Heartbeat published → truth:heartbeat:studiotwo.local_chainfeed
+13:49:31 | INFO    | 💓 studiotwo.local_chainfeed healthy (0s old)
+13:49:31 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:49:31 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:49:41 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:49:41 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:49:46 | INFO    | 💓 Heartbeat published → truth:heartbeat:studiotwo.local_chainfeed
+13:49:46 | INFO    | 💓 studiotwo.local_chainfeed healthy (0s old)
+13:49:51 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:49:51 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:50:01 | INFO    | 💓 Heartbeat published → truth:heartbeat:studiotwo.local_chainfeed
+13:50:01 | INFO    | 💓 studiotwo.local_chainfeed healthy (0s old)
+13:50:01 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:50:01 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:50:01 | WARNING | [Google Alerts] No entries found for Jerome Powell
+13:50:01 | WARNING | [Google Alerts] No entries found for Jerome Powell
+13:50:02 | WARNING | [Google Alerts] No entries found for Federal Reserve
+13:50:02 | WARNING | [Google Alerts] No entries found for Federal Reserve
+13:50:02 | WARNING | [Google Alerts] No entries found for Federal Reserve
+13:50:02 | WARNING | [Google Alerts] No entries found for Federal Reserve
+13:50:02 | INFO    | [Google Alerts] 🧾 Metrics: 0 new, 0 errors.
+13:50:02 | INFO    | [Google Alerts] 🧾 Metrics: 0 new, 0 errors.
+13:50:11 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:50:11 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:50:16 | INFO    | 💓 Heartbeat published → truth:heartbeat:studiotwo.local_chainfeed
+13:50:16 | INFO    | 💓 studiotwo.local_chainfeed healthy (0s old)
+13:50:21 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:50:21 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:50:31 | INFO    | 💓 Heartbeat published → truth:heartbeat:studiotwo.local_chainfeed
+13:50:31 | INFO    | 💓 studiotwo.local_chainfeed healthy (0s old)
+13:50:31 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:50:31 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:50:41 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:50:41 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:50:46 | INFO    | 💓 Heartbeat published → truth:heartbeat:studiotwo.local_chainfeed
+13:50:46 | INFO    | 💓 studiotwo.local_chainfeed healthy (0s old)
+13:50:51 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:50:51 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:50:59 | INFO    | 🌀 Truth update detected via pmessage: set
+13:50:59 | INFO    | 📖 Reloaded truth from Redis (vv1.5.0) at 2025-10-26T17:50:59.135852+00:00
+13:50:59 | INFO    | 🔄 TruthListener received new schema (vv1.5.0)
+13:51:01 | INFO    | 💓 Heartbeat published → truth:heartbeat:studiotwo.local_chainfeed
+13:51:01 | INFO    | 💓 4c4d211ef839_chainfeed healthy (2s old)
+13:51:01 | INFO    | 💓 studiotwo.local_chainfeed healthy (0s old)
+13:51:01 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:51:01 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:51:01 | WARNING | [Financial News Aggregators] No entries found for CoinDesk Bitcoin
+13:51:01 | INFO    | [Financial News Aggregators] 🧾 Metrics: 49 new, 0 errors.
+13:51:01 | WARNING | [Financial News Aggregators] No entries found for CoinDesk Bitcoin
+13:51:01 | INFO    | [Financial News Aggregators] 🧾 Metrics: 49 new, 0 errors.
+13:51:11 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:51:11 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:51:16 | INFO    | 💓 Heartbeat published → truth:heartbeat:studiotwo.local_chainfeed
+13:51:16 | INFO    | 💓 4c4d211ef839_chainfeed healthy (2s old)
+13:51:16 | INFO    | 💓 studiotwo.local_chainfeed healthy (0s old)
+13:51:21 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:51:21 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:51:31 | INFO    | 💓 Heartbeat published → truth:heartbeat:studiotwo.local_chainfeed
+13:51:31 | INFO    | 💓 4c4d211ef839_chainfeed healthy (2s old)
+13:51:31 | INFO    | 💓 studiotwo.local_chainfeed healthy (0s old)
+13:51:31 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:51:31 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:51:41 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:51:41 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:51:46 | INFO    | 💓 Heartbeat published → truth:heartbeat:studiotwo.local_chainfeed
+13:51:46 | INFO    | 💓 4c4d211ef839_chainfeed healthy (2s old)
+13:51:46 | INFO    | 💓 studiotwo.local_chainfeed healthy (0s old)
+13:51:51 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:51:51 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:52:01 | INFO    | 💓 Heartbeat published → truth:heartbeat:studiotwo.local_chainfeed
+13:52:01 | INFO    | 💓 4c4d211ef839_chainfeed healthy (2s old)
+13:52:01 | INFO    | 💓 studiotwo.local_chainfeed healthy (0s old)
+13:52:01 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:52:01 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:52:11 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:52:11 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:52:16 | INFO    | 💓 Heartbeat published → truth:heartbeat:studiotwo.local_chainfeed
+13:52:16 | INFO    | 💓 4c4d211ef839_chainfeed healthy (2s old)
+13:52:16 | INFO    | 💓 studiotwo.local_chainfeed healthy (0s old)
+13:52:21 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:52:21 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:52:31 | INFO    | 💓 Heartbeat published → truth:heartbeat:studiotwo.local_chainfeed
+13:52:31 | INFO    | 💓 4c4d211ef839_chainfeed healthy (2s old)
+13:52:31 | INFO    | 💓 studiotwo.local_chainfeed healthy (0s old)
+13:52:31 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:52:31 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:52:41 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:52:41 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:52:46 | INFO    | 💓 Heartbeat published → truth:heartbeat:studiotwo.local_chainfeed
+13:52:46 | INFO    | 💓 4c4d211ef839_chainfeed healthy (2s old)
+13:52:46 | INFO    | 💓 studiotwo.local_chainfeed healthy (0s old)
+13:52:51 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:52:51 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:53:01 | INFO    | 💓 Heartbeat published → truth:heartbeat:studiotwo.local_chainfeed
+13:53:01 | INFO    | 💓 4c4d211ef839_chainfeed healthy (2s old)
+13:53:01 | INFO    | 💓 studiotwo.local_chainfeed healthy (0s old)
+13:53:01 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:53:01 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:53:01 | WARNING | [Financial News Aggregators] No entries found for CoinDesk Bitcoin
+13:53:01 | INFO    | [Financial News Aggregators] 🧾 Metrics: 49 new, 0 errors.
+13:53:01 | WARNING | [Financial News Aggregators] No entries found for CoinDesk Bitcoin
+13:53:01 | INFO    | [Financial News Aggregators] 🧾 Metrics: 49 new, 0 errors.
+13:53:11 | INFO    | 🕊️ [SPX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:53:11 | INFO    | 🕊️ [NDX_synth] Skipped: Market closed for weekend — next open Monday 09:30 EDT.
+13:53:16 | INFO    | 💓 Heartbeat published → truth:heartbeat:studiotwo.local_chainfeed
+13:53:16 | INFO    | 💓 4c4d211ef839_chainfeed healthy (2s old)
+13:53:16 | INFO    | 💓 studiotwo.local_chainfeed healthy (0s old)

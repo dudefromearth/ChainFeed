@@ -1,37 +1,38 @@
 #!/usr/bin/env python3
 # ===============================================================
-# 🌿 ChainFeed – Heartbeat Emitter
+# 🌿 ChainFeed – Heartbeat Emitter (v2.0, Type-Safe)
 # ===============================================================
-# Author:  StudioTwo Build Lab / Convexity GPT
-# Date:    2025-10-25
+# Author: StudioTwo Build Lab / Convexity GPT
+# Date:   2025-10-26
 #
 # Purpose:
 # --------
-# Provides a continuous heartbeat signal to Redis indicating
-# system health, identity, and runtime phase.
+# Emits periodic heartbeat messages to Redis indicating
+# node liveness, health, and operational mode.
 #
-# Publishes every N seconds (default 15) under:
-#   truth:heartbeat:{node_id}
-#
-# JSON Payload Example:
-# {
-#   "node_id": "studio2_chainfeed",
-#   "timestamp": "2025-10-25T12:14:00Z",
-#   "status": "alive",
-#   "mode": "LIVE",
-#   "version": "v2.0"
-# }
-#
+# v2.0 Changes:
+#   • Integrated with HeartbeatPayload (type-safe schema)
+#   • Auto timestamps and schema versioning
+#   • Clean stop signal handling
 # ===============================================================
 
-import threading
 import time
-import json
-from datetime import datetime, timezone
+import threading
+from core.models.truth_models import HeartbeatPayload
 
 
 class HeartbeatEmitter:
-    def __init__(self, redis_client, node_id: str, interval: int = 15, mode: str = "LIVE", version: str = "v2.0", logger=None):
+    """Publishes liveness heartbeats for this node into Redis."""
+
+    def __init__(
+        self,
+        redis_client,
+        node_id: str,
+        interval: int = 15,
+        mode: str = "LIVE",
+        version: str = "v1.0",
+        logger=None,
+    ):
         self.redis = redis_client
         self.node_id = node_id
         self.interval = interval
@@ -42,6 +43,9 @@ class HeartbeatEmitter:
         self.running = False
         self.thread = None
 
+    # -----------------------------------------------------------
+    # 🌱 Start Emitter Thread
+    # -----------------------------------------------------------
     def start(self):
         if self.running:
             if self.logger:
@@ -51,33 +55,41 @@ class HeartbeatEmitter:
         self.running = True
         self.thread = threading.Thread(target=self._run, daemon=True)
         self.thread.start()
-        if self.logger:
-            self.logger.info(f"💓 HeartbeatEmitter started (interval={self.interval}s) for node: {self.node_id}")
 
-    def stop(self):
-        if not self.running:
-            return
-        self.running = False
-        if self.thread:
-            self.thread.join(timeout=2)
         if self.logger:
-            self.logger.info("💓 HeartbeatEmitter stopped.")
+            self.logger.info(f"💓 HeartbeatEmitter started (interval={self.interval}s).")
 
+    # -----------------------------------------------------------
+    # 🧠 Main Heartbeat Loop
+    # -----------------------------------------------------------
     def _run(self):
         while self.running:
             try:
-                payload = {
-                    "node_id": self.node_id,
-                    "timestamp": datetime.now(timezone.utc).isoformat(),
-                    "status": "alive",
-                    "mode": self.mode,
-                    "version": self.version
-                }
-                self.redis.set(self.key, json.dumps(payload))
+                payload = HeartbeatPayload(
+                    node_id=self.node_id,
+                    status="alive",
+                    mode=self.mode,
+                    version=self.version,
+                    heartbeat_interval=self.interval,
+                )
+
+                self.redis.set(self.key, payload.to_json())
+
                 if self.logger:
                     self.logger.info(f"💓 Heartbeat published → {self.key}")
             except Exception as e:
                 if self.logger:
-                    self.logger.error(f"HeartbeatEmitter error: {e}", exc_info=True)
-
+                    self.logger.error(f"❌ HeartbeatEmitter error: {e}", exc_info=True)
             time.sleep(self.interval)
+
+    # -----------------------------------------------------------
+    # 🛑 Stop Emitter
+    # -----------------------------------------------------------
+    def stop(self):
+        if not self.running:
+            return
+        self.running = False
+        if self.thread and self.thread.is_alive():
+            self.thread.join(timeout=self.interval)
+        if self.logger:
+            self.logger.info("💓 HeartbeatEmitter stopped gracefully.")

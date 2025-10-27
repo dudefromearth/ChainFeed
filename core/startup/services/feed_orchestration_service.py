@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # ===============================================================
-# 🌿 ChainFeed – Feed Orchestration Service (Phase 3.5)
+# 🌿 ChainFeed – Feed Orchestration Service (Type-Safe Refactor)
 # ===============================================================
 # Author:  StudioTwo Build Lab / Convexity GPT
 # Date:    2025-10-26
@@ -10,24 +10,18 @@
 #  Orchestrates initialization of data providers, feed workers,
 #  and external data sources such as RSS-based alert feeds.
 #
-#  Phase 3.5 integrates:
-#   • Market-aware validation (via MarketStateValidator)
-#   • Synthetic-safe startup logic
-#   • RSSFeedIngestor for Google Alerts / News Streams
-#
-# Publishes:
-#   truth:feed:{symbol}:status
-#   truth:feed:rss:{source}:latest
-#   truth:feed:rss:{source}:history
+#  Refactor Summary:
+#   • Replaced untyped JSON payloads with typed models
+#     (FeedStatusPayload, FeedRegistryPayload)
+#   • Ensures consistent, schema-validated serialization
 # ===============================================================
 
-import json
 import time
 import threading
-from datetime import datetime, timezone
 
 from core.startup.services.market_state_validator import MarketStateValidator
 from core.startup.services.rss_feed_ingestor import RSSFeedIngestor
+from core.models.truth_models import FeedStatusPayload, FeedRegistryPayload
 
 
 # ---------------------------------------------------------------
@@ -48,9 +42,15 @@ class FeedWorker(threading.Thread):
         self.logger.info(f"🧩 FeedWorker started for {self.symbol} (interval={self.interval}s)")
         while self.running:
             try:
-                ts = datetime.now(timezone.utc).isoformat()
+                payload = FeedStatusPayload(
+                    node_id="studiotwo.local_chainfeed",
+                    status="active",
+                    feed_group=self.symbol,
+                    item_count=0,
+                    active=True
+                )
                 key = f"truth:feed:{self.symbol}:status"
-                self.redis.set(key, json.dumps({"timestamp": ts, "status": "active"}))
+                self.redis.set(key, payload.model_dump_json())
                 self.logger.debug(f"[{self.symbol}] heartbeat → {key}")
             except Exception as e:
                 self.logger.error(f"[{self.symbol}] worker error: {e}", exc_info=True)
@@ -93,17 +93,29 @@ class FeedOrchestrationService:
                 continue
             active.append(name)
             try:
-                status_key = f"truth:provider:{name}:status"
                 meta_key = f"truth:provider:{name}:metadata"
-                self.redis.set(status_key, "connected")
-                self.redis.set(meta_key, json.dumps(cfg))
+                payload = FeedStatusPayload(
+                    node_id="studiotwo.local_chainfeed",
+                    status="connected",
+                    feed_group=name,
+                    item_count=len(cfg.get("sources", [])) if "sources" in cfg else 0,
+                    active=True
+                )
+                self.redis.set(meta_key, payload.model_dump_json())
                 self.logger.info(f"✅ Provider {name} registered and marked connected.")
             except Exception as e:
                 self.logger.error(f"❌ Provider registration failed for {name}: {e}")
 
-        registry = {"providers": active, "timestamp": datetime.now(timezone.utc).isoformat()}
-        self.redis.set("truth:feed:registry", json.dumps(registry))
-        self.logger.info(f"📡 Provider registry published → {registry}")
+        try:
+            registry_payload = FeedRegistryPayload(
+                node_id="studiotwo.local_chainfeed",
+                status="active",
+                rss_groups=active
+            )
+            self.redis.set("truth:feed:registry", registry_payload.model_dump_json())
+            self.logger.info(f"📡 Provider registry published → {active}")
+        except Exception as e:
+            self.logger.error(f"❌ Failed to publish provider registry: {e}", exc_info=True)
 
     # -----------------------------------------------------------
     # 🧩 Initialize Feed Workers (market-aware)
@@ -121,25 +133,61 @@ class FeedOrchestrationService:
         self.logger.info(f"🚀 Launching feed workers for symbols: {symbols}")
 
         for sym in symbols:
-            valid, reason = self.market_validator.validate_feed_availability(sym)
+            # ============================================================
+            # ⚠️ TEMPORARY VALIDATION BYPASS
+            # ------------------------------------------------------------
+            # The IsItTradable validator will be implemented later tonight.
+            # For now, all feeds are permitted so we can test live chain
+            # ingestion (ES, SPY, etc.) without time-based restrictions.
+            # ============================================================
+            valid = True
+            reason = "Validation temporarily disabled for live chain testing"
+
+            # Original validation (to be re-enabled later):
+            # valid, reason = self.market_validator.validate_feed_availability(sym)
+
             if not valid:
                 self.logger.warning(f"⚠️ Feed for {sym} skipped: {reason}")
                 val_key = f"truth:feed:{sym}:validation"
-                self.redis.set(
-                    val_key,
-                    json.dumps({
-                        "symbol": sym,
-                        "valid": valid,
-                        "reason": reason,
-                        "timestamp": datetime.now(timezone.utc).isoformat(),
-                    }),
+                payload = FeedStatusPayload(
+                    node_id="studiotwo.local_chainfeed",
+                    status="invalid",
+                    feed_group=sym,
+                    item_count=0,
+                    active=False
                 )
+                self.redis.set(val_key, payload.model_dump_json())
                 continue
 
             worker = FeedWorker(self.redis, sym, interval, self.logger)
             worker.start()
             self.feed_workers.append(worker)
             self.logger.info(f"✅ Worker thread started for {sym}")
+
+    # -----------------------------------------------------------
+    # 🧱 Initialize Raw Chain Feeds (new)
+    # -----------------------------------------------------------
+    def _init_raw_chain_feeds(self):
+        """Starts background ingestors for Raw option chains."""
+        chainfeed = self.truth.get("chainfeed", {})
+        raw_cfg = chainfeed.get("raw", {})
+
+        symbols = chainfeed.get("default_symbols", [])
+
+        if not (raw_cfg.get("enabled") and symbols):
+            self.logger.info("ℹ️ Raw chain feed disabled or no symbols defined.")
+            return
+
+        from core.ingestors.raw_chain_ingestor import RawChainIngestor
+
+        for sym in symbols:
+            try:
+                ingestor = RawChainIngestor(self.redis, self.truth, sym, self.logger)
+                ingestor.start()
+                self.feed_workers.append(ingestor)
+                self.logger.info(f"✅ Raw chain ingestor started for {sym}")
+            except Exception as e:
+                self.logger.error(f"❌ Failed to start Raw chain ingestor for {sym}: {e}", exc_info=True)
 
     # -----------------------------------------------------------
     # 📰 Initialize RSS Feeds (Google Alerts, etc.)
@@ -173,6 +221,20 @@ class FeedOrchestrationService:
         try:
             self._init_providers()
             self._init_feeds()
+            self._init_raw_chain_feeds()  # ✅ NEW — Raw Chain Integration
+
+            # -----------------------------------------------------------
+            # 🌱 Safe debug: Inspect chainfeed + raw config if present
+            # -----------------------------------------------------------
+            chain_cfg = self.truth.get("chainfeed", {})
+            raw_cfg = chain_cfg.get("raw", {})
+            default_symbols = chain_cfg.get("default_symbols", [])
+
+            self.logger.info(f"🧭 DEBUG chainfeed config → {chain_cfg}")
+            self.logger.info(f"🧭 DEBUG raw_cfg → {raw_cfg}")
+            self.logger.info(f"🧭 DEBUG default_symbols → {default_symbols}")
+            # -----------------------------------------------------------
+
             self._init_rss_feeds()
             self.logger.info("✅ Feed Orchestration Service fully initialized.")
         except Exception as e:
